@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Base — CSS variables, reset, typography, layout utilities
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties (Design Tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand colors — Quest red + dark palette */
+  --qt-color-primary:    #CC0000;
+  --qt-color-primary-dark: #A30000;
+  --qt-color-secondary:  #1A1A2E;
+  --qt-color-dark:       #111111;
+
+  /* Semantic colors */
+  --qt-color-text:       #222222;
+  --qt-color-muted:      #6B6B6B;
+  --qt-color-light:      #999999;
+  --qt-color-background: #FFFFFF;
+  --qt-color-surface:    #F5F5F7;
+  --qt-color-card:       #FFFFFF;
+  --qt-color-border:     #E5E7EB;
+  --qt-color-success:    #27AE60;
+  --qt-color-warning:    #F39C12;
+  --qt-color-error:      #E74C3C;
+
+  /* Typography — industrial/manufacturing feel */
+  --qt-font-heading:  'Barlow Condensed', sans-serif;
+  --qt-font-body:     'Barlow', sans-serif;
+
+  --qt-text-xs:   0.75rem;
+  --qt-text-sm:   0.875rem;
+  --qt-text-base: 1rem;
+  --qt-text-lg:   1.125rem;
+  --qt-text-xl:   1.25rem;
+  --qt-text-2xl:  1.5rem;
+  --qt-text-3xl:  1.875rem;
+  --qt-text-4xl:  2.25rem;
+  --qt-text-5xl:  3rem;
+
+  --qt-weight-normal:    400;
+  --qt-weight-medium:    500;
+  --qt-weight-semibold:  600;
+  --qt-weight-bold:      700;
+  --qt-weight-extrabold: 800;
+  --qt-weight-black:     900;
+
+  /* Spacing scale */
+  --qt-space-1:  0.25rem;
+  --qt-space-2:  0.5rem;
+  --qt-space-3:  0.75rem;
+  --qt-space-4:  1rem;
+  --qt-space-5:  1.25rem;
+  --qt-space-6:  1.5rem;
+  --qt-space-8:  2rem;
+  --qt-space-10: 2.5rem;
+  --qt-space-12: 3rem;
+  --qt-space-16: 4rem;
+  --qt-space-20: 5rem;
+  --qt-space-24: 6rem;
+
+  /* Layout */
+  --qt-container-max: 1280px;
+  --qt-container-pad: 1rem;
+
+  /* Radii */
+  --qt-radius-sm:   4px;
+  --qt-radius:      8px;
+  --qt-radius-md:   12px;
+  --qt-radius-lg:   16px;
+  --qt-radius-full: 9999px;
+
+  /* Shadows */
+  --qt-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --qt-shadow:    0 4px 12px 0 rgb(0 0 0 / 0.08);
+  --qt-shadow-md: 0 8px 24px 0 rgb(0 0 0 / 0.1);
+  --qt-shadow-lg: 0 16px 40px 0 rgb(0 0 0 / 0.12);
+
+  /* Transitions */
+  --qt-transition:      0.2s ease;
+  --qt-transition-slow: 0.35s ease;
+
+  /* Header */
+  --qt-header-height:  80px;
+  --qt-top-bar-height: 36px;
+
+  /* Z-index layers */
+  --qt-z-base:   1;
+  --qt-z-header: 100;
+  --qt-z-drawer: 200;
+  --qt-z-modal:  300;
+  --qt-z-toast:  400;
+}
+
+/* --------------------------------------------------------------------------
+   2. Box-sizing and base reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--qt-font-body);
+  font-size: var(--qt-text-base);
+  font-weight: var(--qt-weight-normal);
+  line-height: 1.6;
+  color: var(--qt-color-text);
+  background-color: var(--qt-color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--qt-color-primary);
+  text-decoration: none;
+  transition: color var(--qt-transition);
+}
+
+a:hover {
+  color: var(--qt-color-primary-dark);
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--qt-font-heading);
+  font-weight: var(--qt-weight-bold);
+  line-height: 1.2;
+  margin: 0 0 var(--qt-space-4);
+  color: var(--qt-color-dark);
+}
+
+h1 { font-size: var(--qt-text-4xl); }
+h2 { font-size: var(--qt-text-3xl); }
+h3 { font-size: var(--qt-text-2xl); }
+h4 { font-size: var(--qt-text-xl); }
+h5 { font-size: var(--qt-text-lg); }
+h6 { font-size: var(--qt-text-base); }
+
+p {
+  margin: 0 0 var(--qt-space-4);
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout utilities
+   -------------------------------------------------------------------------- */
+.qt-container {
+  width: 100%;
+  max-width: var(--qt-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--qt-container-pad);
+  padding-right: var(--qt-container-pad);
+}
+
+.qt-main {
+  min-height: 60vh;
+  padding: 0 0 var(--qt-space-8);
+}
+
+.qt-main--home {
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. Screen reader text
+   -------------------------------------------------------------------------- */
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  clip-path: none;
+  color: #21759b;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+}
+
+.qt-skip-link:focus {
+  z-index: calc(var(--qt-z-toast) + 1);
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive breakpoints reference (mobile-first)
+   --------------------------------------------------------------------------
+   480px  — small phone landscape
+   768px  — tablet
+   1024px — small desktop
+   1280px — desktop
+   1440px — wide
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+  :root {
+    --qt-container-pad: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --qt-container-pad: 2rem;
+  }
+}

@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Page templates — banners, resources, etc.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page banner (used by page templates)
+   -------------------------------------------------------------------------- */
+.qt-page-banner {
+  background: var(--qt-color-dark);
+  padding: var(--qt-space-10) 0;
+}
+
+.qt-page-banner__title {
+  font-size: var(--qt-text-3xl);
+  font-weight: var(--qt-weight-extrabold);
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .qt-page-banner__title {
+    font-size: var(--qt-text-4xl);
+  }
+}
+
+.qt-page-banner__subtitle {
+  font-size: var(--qt-text-lg);
+  color: rgba(255, 255, 255, 0.8);
+  margin: var(--qt-space-2) 0 0;
+  max-width: 600px;
+}
+
+/* --------------------------------------------------------------------------
+   Resources grid
+   -------------------------------------------------------------------------- */
+.qt-resources-page {
+  padding: var(--qt-space-10) 0;
+}
+
+.qt-resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-6);
+}
+
+@media (min-width: 480px) {
+  .qt-resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .qt-resources-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .qt-resources-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Resource card */
+.qt-resource-card {
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  overflow: hidden;
+  transition: box-shadow var(--qt-transition), transform var(--qt-transition);
+}
+
+.qt-resource-card:hover {
+  box-shadow: var(--qt-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Preview / thumbnail area */
+.qt-resource-card__preview {
+  display: block;
+  aspect-ratio: 3 / 4;
+  background: var(--qt-color-surface);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.qt-resource-card__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--qt-transition-slow);
+}
+
+.qt-resource-card:hover .qt-resource-card__preview img {
+  transform: scale(1.03);
+}
+
+/* File type icon placeholder */
+.qt-resource-card__icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--qt-color-light);
+  gap: var(--qt-space-2);
+}
+
+.qt-resource-card__ext {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-black);
+  color: var(--qt-color-primary);
+  background: rgba(204, 0, 0, 0.1);
+  padding: var(--qt-space-1) var(--qt-space-2);
+  border-radius: var(--qt-radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Info area */
+.qt-resource-card__info {
+  padding: var(--qt-space-4);
+}
+
+.qt-resource-card__name {
+  font-size: 1.1875rem;
+  font-weight: var(--qt-weight-bold);
+  margin: 0 0 var(--qt-space-3);
+  line-height: 1.4;
+}
+
+.qt-resource-card__name a {
+  color: var(--qt-color-dark);
+  text-decoration: none;
+}
+
+.qt-resource-card__name a:hover {
+  color: var(--qt-color-primary);
+}
+
+/* Meta row */
+.qt-resource-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qt-space-2);
+  margin-bottom: var(--qt-space-3);
+}
+
+.qt-resource-card__type,
+.qt-resource-card__size,
+.qt-resource-card__cat {
+  font-size: 0.8125rem;
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: var(--qt-radius-full);
+  background: var(--qt-color-surface);
+  color: var(--qt-color-muted);
+}
+
+.qt-resource-card__type {
+  background: var(--qt-color-primary);
+  color: #fff;
+}
+
+/* Download link */
+.qt-resource-card__download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qt-space-2);
+  font-family: var(--qt-font-heading);
+  font-size: 0.9375rem;
+  font-weight: var(--qt-weight-bold);
+  color: var(--qt-color-primary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  transition: color var(--qt-transition);
+}
+
+.qt-resource-card__download:hover {
+  color: var(--qt-color-primary-dark);
+}

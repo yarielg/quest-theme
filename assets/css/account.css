@@ -1,0 +1,528 @@
+/* ==========================================================================
+   Account — auth pages, dashboard, B2B portal
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Auth page (login + register split)
+   -------------------------------------------------------------------------- */
+.qt-auth {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--qt-space-8) var(--qt-container-pad);
+}
+
+/* Success state */
+.qt-auth__success {
+  text-align: center;
+  padding: var(--qt-space-10);
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.05), rgba(39, 174, 96, 0.1));
+  border: 1px solid var(--qt-color-success);
+  border-radius: var(--qt-radius-md);
+}
+
+.qt-auth__success-icon {
+  color: var(--qt-color-success);
+  margin-bottom: var(--qt-space-4);
+}
+
+.qt-auth__success h2 {
+  color: var(--qt-color-success);
+  margin-bottom: var(--qt-space-2);
+}
+
+.qt-auth__success p {
+  color: var(--qt-color-muted);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Auth card — single centered card */
+.qt-auth__card {
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  overflow: hidden;
+}
+
+/* Tabs */
+.qt-auth__tabs {
+  display: flex;
+  border-bottom: 2px solid var(--qt-color-border);
+}
+
+.qt-auth__tab {
+  flex: 1;
+  padding: var(--qt-space-4);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-base);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--qt-color-muted);
+  background: var(--qt-color-surface);
+  border: none;
+  cursor: pointer;
+  transition: all var(--qt-transition);
+  position: relative;
+}
+
+.qt-auth__tab:hover {
+  color: var(--qt-color-dark);
+}
+
+.qt-auth__tab--active {
+  color: var(--qt-color-primary);
+  background: var(--qt-color-card);
+}
+
+.qt-auth__tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--qt-color-primary);
+}
+
+/* Panels */
+.qt-auth__panel {
+  display: none;
+  padding: var(--qt-space-8);
+}
+
+.qt-auth__panel--active {
+  display: block;
+}
+
+.qt-auth__panel-header {
+  margin-bottom: var(--qt-space-6);
+}
+
+.qt-auth__title {
+  font-size: var(--qt-text-2xl);
+  font-weight: var(--qt-weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--qt-space-1);
+}
+
+.qt-auth__subtitle {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+  margin: 0;
+}
+
+/* Switch link at bottom */
+.qt-auth__switch {
+  text-align: center;
+  margin-top: var(--qt-space-6);
+  padding-top: var(--qt-space-6);
+  border-top: 1px solid var(--qt-color-border);
+}
+
+.qt-auth__switch p {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+  margin: 0;
+}
+
+.qt-auth__switch-btn {
+  background: none;
+  border: none;
+  color: var(--qt-color-primary);
+  font-weight: var(--qt-weight-bold);
+  cursor: pointer;
+  padding: 0;
+  font-size: var(--qt-text-sm);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.qt-auth__switch-btn:hover {
+  color: var(--qt-color-primary-dark);
+}
+
+/* Auth form fields */
+.qt-auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qt-space-4);
+}
+
+.qt-auth__field label {
+  display: block;
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-semibold);
+  color: var(--qt-color-dark);
+  margin-bottom: var(--qt-space-1);
+}
+
+.qt-auth__field input {
+  width: 100%;
+}
+
+.qt-required {
+  color: var(--qt-color-primary);
+}
+
+.qt-auth__field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--qt-space-4);
+}
+
+.qt-auth__field-row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 479px) {
+  .qt-auth__field-row,
+  .qt-auth__field-row--3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qt-auth__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qt-space-4);
+}
+
+.qt-auth__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--qt-space-2);
+  font-size: var(--qt-text-sm);
+  cursor: pointer;
+}
+
+.qt-auth__checkbox input {
+  width: auto;
+}
+
+.qt-auth__forgot {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-primary);
+}
+
+.qt-auth__note {
+  font-size: var(--qt-text-xs);
+  color: var(--qt-color-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard — B2B portal
+   -------------------------------------------------------------------------- */
+
+/* Pending state */
+.qt-dashboard__pending {
+  text-align: center;
+  padding: var(--qt-space-12) var(--qt-space-4);
+  background: var(--qt-color-surface);
+  border-radius: var(--qt-radius-md);
+}
+
+.qt-dashboard__pending-icon {
+  color: var(--qt-color-warning);
+  margin-bottom: var(--qt-space-4);
+}
+
+.qt-dashboard__pending h2 {
+  margin-bottom: var(--qt-space-2);
+}
+
+.qt-dashboard__pending > p {
+  color: var(--qt-color-muted);
+  max-width: 500px;
+  margin: 0 auto var(--qt-space-8);
+}
+
+.qt-dashboard__pending-details {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius);
+  padding: var(--qt-space-4);
+}
+
+.qt-dashboard__pending-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--qt-space-2) 0;
+  font-size: var(--qt-text-sm);
+  border-bottom: 1px solid var(--qt-color-border);
+}
+
+.qt-dashboard__pending-row:last-child {
+  border-bottom: none;
+}
+
+.qt-dashboard__pending-row span:first-child {
+  color: var(--qt-color-muted);
+}
+
+/* Badges */
+.qt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--qt-space-1) var(--qt-space-3);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: var(--qt-radius-full);
+}
+
+.qt-badge--pending {
+  background: rgba(243, 156, 18, 0.12);
+  color: #D4880F;
+}
+
+.qt-badge--active {
+  background: rgba(39, 174, 96, 0.12);
+  color: var(--qt-color-success);
+}
+
+/* Welcome bar */
+.qt-dashboard__welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--qt-space-4);
+  padding: var(--qt-space-6);
+  background: var(--qt-color-surface);
+  border-radius: var(--qt-radius-md);
+  margin-bottom: var(--qt-space-8);
+}
+
+.qt-dashboard__welcome h2 {
+  margin: 0;
+  font-size: var(--qt-text-2xl);
+}
+
+.qt-dashboard__company {
+  color: var(--qt-color-muted);
+  font-size: var(--qt-text-sm);
+  margin: var(--qt-space-1) 0 0;
+}
+
+.qt-dashboard__welcome-status {
+  display: flex;
+  align-items: center;
+  gap: var(--qt-space-3);
+}
+
+.qt-dashboard__price-list {
+  font-size: var(--qt-text-xs);
+  color: var(--qt-color-muted);
+}
+
+/* Dashboard card grid */
+.qt-dashboard__grid,
+.qt-resources__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-4);
+}
+
+@media (min-width: 480px) {
+  .qt-dashboard__grid,
+  .qt-resources__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.qt-dashboard__card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--qt-space-6);
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--qt-transition), transform var(--qt-transition), border-color var(--qt-transition);
+}
+
+.qt-dashboard__card:hover {
+  box-shadow: var(--qt-shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--qt-color-primary);
+  color: inherit;
+}
+
+.qt-dashboard__card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--qt-radius);
+  background: rgba(204, 0, 0, 0.08);
+  color: var(--qt-color-primary);
+  margin-bottom: var(--qt-space-4);
+}
+
+.qt-dashboard__card h3 {
+  font-size: var(--qt-text-base);
+  font-weight: var(--qt-weight-bold);
+  margin: 0 0 var(--qt-space-2);
+}
+
+.qt-dashboard__card p {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Account section (company details, resources)
+   -------------------------------------------------------------------------- */
+.qt-account-section__title {
+  font-size: var(--qt-text-2xl);
+  font-weight: var(--qt-weight-extrabold);
+  text-transform: uppercase;
+  margin-bottom: var(--qt-space-6);
+}
+
+.qt-account-details {
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  padding: var(--qt-space-6);
+  margin-bottom: var(--qt-space-6);
+}
+
+.qt-account-details__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-4);
+}
+
+@media (min-width: 480px) {
+  .qt-account-details__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.qt-account-details__item--full {
+  grid-column: 1 / -1;
+}
+
+.qt-account-details__label {
+  display: block;
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qt-color-muted);
+  margin-bottom: var(--qt-space-1);
+}
+
+.qt-account-details__value {
+  font-size: var(--qt-text-base);
+  color: var(--qt-color-dark);
+  font-weight: var(--qt-weight-medium);
+}
+
+.qt-account-section__note {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+}
+
+/* --------------------------------------------------------------------------
+   WooCommerce My Account nav override
+   -------------------------------------------------------------------------- */
+.woocommerce-MyAccount-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.woocommerce-MyAccount-navigation ul li a {
+  display: flex;
+  align-items: center;
+  padding: var(--qt-space-3) var(--qt-space-4);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-medium);
+  color: var(--qt-color-text);
+  text-decoration: none;
+  border-radius: var(--qt-radius-sm);
+  border-left: 3px solid transparent;
+  transition: all var(--qt-transition);
+}
+
+.woocommerce-MyAccount-navigation ul li a:hover {
+  background-color: var(--qt-color-surface);
+  color: var(--qt-color-primary);
+}
+
+.woocommerce-MyAccount-navigation ul li.is-active a,
+.woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--dashboard.is-active a {
+  background-color: rgba(204, 0, 0, 0.08);
+  color: var(--qt-color-primary);
+  font-weight: var(--qt-weight-bold);
+  border-left-color: var(--qt-color-primary);
+}
+
+/* --------------------------------------------------------------------------
+   My Account layout — sidebar nav + content area
+   -------------------------------------------------------------------------- */
+
+/* Nav sidebar */
+.woocommerce-MyAccount-navigation {
+  background: var(--qt-color-card);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  padding: var(--qt-space-4);
+  margin-bottom: var(--qt-space-6);
+}
+
+/* Content area */
+.woocommerce-MyAccount-content {
+  min-width: 0;
+}
+
+/* Mobile: stack nav above content */
+.qt-main--account .woocommerce-MyAccount-navigation,
+.qt-main--account .woocommerce-MyAccount-content {
+  width: 100%;
+}
+
+/* Desktop: sidebar + content grid */
+@media (min-width: 768px) {
+  .qt-main--account .woocommerce {
+    display: grid !important;
+    grid-template-columns: 240px 1fr !important;
+    gap: var(--qt-space-8) !important;
+    align-items: start !important;
+  }
+
+  .woocommerce-MyAccount-navigation {
+    position: sticky;
+    top: calc(var(--qt-header-height) + var(--qt-space-4));
+    margin-bottom: 0;
+  }
+}
+
+/* Hide page title on account pages */
+.woocommerce-account .qt-page-header {
+  display: none;
+}
+
+/* When not logged in — no grid, just centered content */
+.qt-main--account .qt-auth {
+  max-width: 560px;
+  margin: 0 auto;
+}
