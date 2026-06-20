@@ -61,41 +61,21 @@ sort( $countries );
 		<!-- Search -->
 		<div class="qt-locator__search">
 			<div class="qt-container">
-				<div class="qt-locator__search-tabs">
-					<button type="button" class="qt-locator__tab qt-locator__tab--active" data-mode="location"><?php esc_html_e( 'By Location', 'quest' ); ?></button>
-					<button type="button" class="qt-locator__tab" data-mode="state"><?php esc_html_e( 'By State', 'quest' ); ?></button>
-					<button type="button" class="qt-locator__tab" data-mode="country"><?php esc_html_e( 'By Country', 'quest' ); ?></button>
-				</div>
 				<div class="qt-locator__search-row">
-					<div class="qt-locator__panel qt-locator__panel--active" data-panel="location">
-						<input type="text" id="qt-loc-input" placeholder="<?php esc_attr_e( 'Enter city, state, or zip code...', 'quest' ); ?>" autocomplete="off">
-					</div>
-					<div class="qt-locator__panel" data-panel="state" hidden>
-						<select id="qt-loc-state">
-							<option value=""><?php esc_html_e( 'Select a state...', 'quest' ); ?></option>
-							<?php foreach ( $states as $s ) : ?>
-								<option value="<?php echo esc_attr( $s ); ?>"><?php echo esc_html( $s ); ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-					<div class="qt-locator__panel" data-panel="country" hidden>
-						<select id="qt-loc-country">
-							<option value=""><?php esc_html_e( 'Select a country...', 'quest' ); ?></option>
-							<?php foreach ( $countries as $c ) : ?>
-								<option value="<?php echo esc_attr( $c ); ?>"><?php echo esc_html( $c ); ?></option>
-							<?php endforeach; ?>
-						</select>
+					<div class="qt-locator__input-wrap">
+						<?php echo quest_icon( 'search', 18 ); ?>
+						<input type="text" id="qt-loc-input" placeholder="<?php esc_attr_e( 'Search by city, state, zip code, or country...', 'quest' ); ?>" autocomplete="off">
 					</div>
 					<select id="qt-loc-radius" class="qt-locator__radius">
 						<option value="25">25 mi</option>
 						<option value="50" selected>50 mi</option>
 						<option value="100">100 mi</option>
 						<option value="250">250 mi</option>
-						<option value="0"><?php esc_html_e( 'All', 'quest' ); ?></option>
+						<option value="500">500 mi</option>
+						<option value="0"><?php esc_html_e( 'Show All', 'quest' ); ?></option>
 					</select>
 					<button type="button" id="qt-loc-search" class="qt-btn qt-btn--primary">
-						<?php echo quest_icon( 'search', 18 ); ?>
-						<span><?php esc_html_e( 'Search', 'quest' ); ?></span>
+						<?php esc_html_e( 'Search', 'quest' ); ?>
 					</button>
 				</div>
 				<div class="qt-locator__status" id="qt-loc-status"></div>

@@ -34,11 +34,13 @@ function quest_scripts(): void {
 
 	if ( is_page_template( 'page-distributor-locator.php' ) ) {
 		wp_enqueue_style( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4' );
+		wp_enqueue_style( 'leaflet-cluster', 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css', [ 'leaflet' ], '1.5.3' );
 		wp_enqueue_script( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true );
+		wp_enqueue_script( 'leaflet-cluster', 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js', [ 'leaflet' ], '1.5.3', true );
 		wp_enqueue_script(
 			'quest-distributor-locator',
 			QUEST_URL . '/assets/js/distributor-locator.js',
-			[ 'leaflet' ],
+			[ 'leaflet', 'leaflet-cluster' ],
 			$ver,
 			[ 'strategy' => 'defer', 'in_footer' => true ]
 		);
