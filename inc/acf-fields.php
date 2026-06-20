@@ -670,6 +670,30 @@ function quest_register_acf_fields(): void {
 				'name'  => 'qwa_subtitle',
 				'type'  => 'text',
 			],
+			// Company Overview
+			[
+				'key'   => 'field_qwa_overview_heading',
+				'label' => 'Overview Heading',
+				'name'  => 'qwa_overview_heading',
+				'type'  => 'text',
+				'default_value' => 'Company Overview',
+			],
+			[
+				'key'          => 'field_qwa_overview_video',
+				'label'        => 'YouTube Video URL',
+				'name'         => 'qwa_overview_video',
+				'type'         => 'url',
+				'instructions' => 'Paste a YouTube video URL (e.g. https://www.youtube.com/watch?v=XXXXX)',
+			],
+			[
+				'key'          => 'field_qwa_overview_text',
+				'label'        => 'Overview Text',
+				'name'         => 'qwa_overview_text',
+				'type'         => 'wysiwyg',
+				'tabs'         => 'all',
+				'media_upload' => 1,
+				'instructions' => 'Company overview content displayed next to the video.',
+			],
 			// Certifications
 			[
 				'key'   => 'field_qwa_cert_heading',

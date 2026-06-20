@@ -43,7 +43,7 @@ if ( empty( $departments ) ) {
 }
 ?>
 
-<main id="qt-main" class="qt-main">
+<main id="qt-main" class="qt-main qt-main--home">
 
 	<div class="qt-page-banner">
 		<div class="qt-container">

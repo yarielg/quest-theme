@@ -9,6 +9,11 @@ get_header();
 $page_title    = get_the_title();
 $page_subtitle = function_exists( 'get_field' ) ? get_field( 'qwa_subtitle' ) : '';
 
+// Company Overview
+$overview_heading = function_exists( 'get_field' ) ? ( get_field( 'qwa_overview_heading' ) ?: 'Company Overview' ) : 'Company Overview';
+$overview_video   = function_exists( 'get_field' ) ? get_field( 'qwa_overview_video' ) : '';
+$overview_text    = function_exists( 'get_field' ) ? get_field( 'qwa_overview_text' ) : '';
+
 // Certifications
 $cert_heading = function_exists( 'get_field' ) ? ( get_field( 'qwa_cert_heading' ) ?: 'Certifications & Compliance' ) : 'Certifications & Compliance';
 $cert_body    = function_exists( 'get_field' ) ? get_field( 'qwa_cert_body' ) : '';
@@ -81,6 +86,31 @@ if ( empty( $affiliations ) ) {
 			<?php endif; ?>
 		</div>
 	</div>
+
+	<!-- Company Overview — hero section -->
+	<?php if ( $overview_video || $overview_text ) : ?>
+		<section class="qt-qwa-hero">
+			<div class="qt-container">
+				<div class="qt-qwa-hero__layout">
+					<?php if ( $overview_video ) : ?>
+						<div class="qt-qwa-hero__video">
+							<div class="qt-video-embed">
+								<?php echo wp_oembed_get( esc_url( $overview_video ) ) ?: '<iframe src="' . esc_url( $overview_video ) . '" frameborder="0" allowfullscreen></iframe>'; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+					<?php if ( $overview_text ) : ?>
+						<div class="qt-qwa-hero__content">
+							<h2 class="qt-qwa-hero__heading"><?php echo esc_html( $overview_heading ); ?></h2>
+							<div class="qt-qwa-hero__text">
+								<?php echo wp_kses_post( $overview_text ); ?>
+							</div>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
 
 	<!-- Certifications -->
 	<section class="qt-section qt-qwa-certs">

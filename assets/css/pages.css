@@ -315,6 +315,110 @@
    Quality, Warranty & Affiliations page
    -------------------------------------------------------------------------- */
 
+/* Company Overview — hero-style top section */
+.qt-qwa-hero {
+  background: var(--qt-color-dark);
+  padding: var(--qt-space-12) 0;
+}
+
+.qt-qwa-hero__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .qt-qwa-hero__layout {
+    grid-template-columns: 55% 1fr;
+    gap: var(--qt-space-10);
+  }
+}
+
+/* Video */
+.qt-video-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--qt-radius-md);
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.qt-video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Content */
+.qt-qwa-hero__heading {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-3xl);
+  font-weight: var(--qt-weight-extrabold);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--qt-space-5);
+  position: relative;
+  padding-bottom: var(--qt-space-4);
+}
+
+.qt-qwa-hero__heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--qt-color-primary);
+}
+
+.qt-qwa-hero__text {
+  font-size: var(--qt-text-base);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.qt-qwa-hero__text h3,
+.qt-qwa-hero__text h4 {
+  font-family: var(--qt-font-heading);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-top: var(--qt-space-6);
+}
+
+.qt-qwa-hero__text p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.qt-qwa-hero__text strong {
+  color: #fff;
+}
+
+.qt-qwa-hero__text ul,
+.qt-qwa-hero__text ol {
+  padding-left: var(--qt-space-5);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.qt-qwa-hero__text li {
+  margin-bottom: var(--qt-space-2);
+}
+
+.qt-qwa-hero__text a {
+  color: var(--qt-color-primary);
+}
+
+.qt-qwa-hero__text a:hover {
+  color: #fff;
+}
+
 /* Certifications — two-column layout */
 .qt-qwa-certs {
   background: var(--qt-color-surface);

@@ -203,6 +203,36 @@
   padding: var(--qt-space-1) 0;
 }
 
+/* Contact list with icons */
+.qt-footer__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qt-footer__contact-list li {
+  display: flex;
+  gap: var(--qt-space-2);
+  margin-bottom: var(--qt-space-3);
+  font-size: var(--qt-text-sm);
+  line-height: 1.5;
+}
+
+.qt-footer__contact-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.6;
+}
+
+.qt-footer__contact-list a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.qt-footer__contact-list a:hover {
+  color: #fff;
+}
+
 /* Bottom bar */
 .qt-footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);

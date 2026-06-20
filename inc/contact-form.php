@@ -46,9 +46,17 @@ function quest_handle_contact_form(): void {
 		wp_send_json_error( [ 'message' => 'Please fill in all required fields.' ] );
 	}
 
-	$admin_email = function_exists( 'quest_get_notification_email' )
-		? quest_get_notification_email()
-		: get_option( 'admin_email' );
+	$admin_email = '';
+	if ( function_exists( 'get_field' ) ) {
+		$page_id = wc_get_page_id( 'myaccount' );
+		$contact_pages = get_pages( [ 'meta_key' => '_wp_page_template', 'meta_value' => 'page-contact.php' ] );
+		if ( ! empty( $contact_pages ) ) {
+			$admin_email = get_field( 'contact_form_email', $contact_pages[0]->ID );
+		}
+	}
+	if ( ! $admin_email || ! is_email( $admin_email ) ) {
+		$admin_email = get_option( 'admin_email' );
+	}
 
 	$site_name   = get_bloginfo( 'name' );
 	$mail_subject = sprintf( '[%s] Contact: %s — %s', $site_name, $subject, $name );

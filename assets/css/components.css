@@ -415,3 +415,77 @@ nav.woocommerce-pagination ul.page-numbers li a:hover {
   border-color: var(--qt-color-primary);
   color: #fff;
 }
+
+/* --------------------------------------------------------------------------
+   CTA section — global (used on homepage, contact, etc.)
+   -------------------------------------------------------------------------- */
+.qt-cta {
+  background-color: var(--qt-color-dark);
+  padding: var(--qt-space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.qt-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(204, 0, 0, 0.06);
+}
+
+.qt-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-8);
+  align-items: center;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .qt-cta__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.qt-cta__content {
+  text-align: left;
+}
+
+.qt-cta__headline {
+  font-size: var(--qt-text-3xl);
+  font-weight: var(--qt-weight-extrabold);
+  margin-bottom: var(--qt-space-4);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.qt-cta__body {
+  font-size: var(--qt-text-lg);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--qt-space-8);
+  line-height: 1.7;
+}
+
+.qt-cta__media {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .qt-cta__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.qt-cta__media img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--qt-radius-md);
+  box-shadow: var(--qt-shadow-lg);
+}
