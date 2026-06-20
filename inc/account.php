@@ -212,14 +212,18 @@ add_action( 'template_redirect', 'quest_restrict_pending_users' );
 
 // ---------------------------------------------------------------------------
 // Custom My Account endpoints
+// Skip when quest-asap plugin handles these (avoids duplicate registration)
 // ---------------------------------------------------------------------------
 function quest_account_endpoints(): void {
+	if ( class_exists( 'QuestAsap\\Dealer\\Endpoints' ) ) return;
 	add_rewrite_endpoint( 'company-details', EP_ROOT | EP_PAGES );
 	add_rewrite_endpoint( 'resources', EP_ROOT | EP_PAGES );
 }
 add_action( 'init', 'quest_account_endpoints' );
 
 function quest_account_menu_items( array $items ): array {
+	if ( class_exists( 'QuestAsap\\Dealer\\Endpoints' ) ) return $items;
+
 	$user = wp_get_current_user();
 	$is_pending = in_array( 'quest_pending', (array) $user->roles, true );
 
@@ -243,11 +247,13 @@ function quest_account_menu_items( array $items ): array {
 add_filter( 'woocommerce_account_menu_items', 'quest_account_menu_items' );
 
 function quest_account_company_details_content(): void {
+	if ( class_exists( 'QuestAsap\\Dealer\\Endpoints' ) ) return;
 	get_template_part( 'template-parts/account/company-details' );
 }
 add_action( 'woocommerce_account_company-details_endpoint', 'quest_account_company_details_content' );
 
 function quest_account_resources_content(): void {
+	if ( class_exists( 'QuestAsap\\Dealer\\Endpoints' ) ) return;
 	get_template_part( 'template-parts/account/resources' );
 }
 add_action( 'woocommerce_account_resources_endpoint', 'quest_account_resources_content' );

@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( is_front_page() ) return;
+if ( function_exists( 'is_account_page' ) && is_account_page() ) return;
 ?>
 
 <div class="qt-page-breadcrumb">

@@ -14,3 +14,5 @@ require_once QUEST_DIR . '/inc/class-mega-menu-walker.php';
 require_once QUEST_DIR . '/inc/ajax-search.php';
 require_once QUEST_DIR . '/inc/contact-form.php';
 require_once QUEST_DIR . '/inc/email-template.php';
+require_once QUEST_DIR . '/inc/account.php';
+require_once QUEST_DIR . '/inc/admin-approval.php';

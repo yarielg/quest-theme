@@ -385,15 +385,54 @@ function quest_register_acf_fields(): void {
 				'instructions' => 'Select which categories appear as tabs. Each tab shows a carousel of 3 products from that category.',
 			],
 
-			// Partner logos
+			// Sister site banner
+			[
+				'key'   => 'field_sister_site_label',
+				'label' => 'Sister Site Label',
+				'name'  => 'sister_site_label',
+				'type'  => 'text',
+				'default_value' => 'Quest Family of Brands',
+				'instructions'  => 'Small eyebrow text above the heading.',
+			],
+			[
+				'key'   => 'field_sister_site_heading',
+				'label' => 'Sister Site Heading',
+				'name'  => 'sister_site_heading',
+				'type'  => 'text',
+				'default_value' => 'Need Racks, Enclosures & Cable Management?',
+			],
+			[
+				'key'   => 'field_sister_site_text',
+				'label' => 'Sister Site Description',
+				'name'  => 'sister_site_text',
+				'type'  => 'textarea',
+				'rows'  => 3,
+				'default_value' => 'Visit Quest Manufacturing for server racks, wall-mount enclosures, brackets, cable trays, and infrastructure solutions.',
+			],
+			[
+				'key'   => 'field_sister_site_url',
+				'label' => 'Sister Site URL',
+				'name'  => 'sister_site_url',
+				'type'  => 'url',
+				'default_value' => 'https://questmanufacturing.net',
+				'wrapper' => [ 'width' => '50' ],
+			],
+			[
+				'key'   => 'field_sister_site_btn_text',
+				'label' => 'Sister Site Button Text',
+				'name'  => 'sister_site_btn_text',
+				'type'  => 'text',
+				'default_value' => 'Visit Site',
+				'wrapper' => [ 'width' => '50' ],
+			],
 			[
 				'key'           => 'field_sister_site_logo',
-				'label'         => 'Sister Site Logo (Quest Manufacturing)',
+				'label'         => 'Sister Site Logo',
 				'name'          => 'sister_site_logo',
 				'type'          => 'image',
 				'return_format' => 'array',
 				'preview_size'  => 'medium',
-				'instructions'  => 'Logo for Quest Manufacturing shown in the sister site banner.',
+				'instructions'  => 'Logo displayed on the right side of the sister site banner.',
 			],
 			[
 				'key'           => 'field_partner_logos',

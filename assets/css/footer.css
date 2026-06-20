@@ -58,30 +58,20 @@
 .qt-sister__text {
   font-size: var(--qt-text-sm);
   color: rgba(255, 255, 255, 0.6);
-  margin: 0;
+  margin: 0 0 var(--qt-space-6);
   max-width: 500px;
   line-height: 1.5;
 }
 
 .qt-sister__action {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--qt-space-4);
-}
-
-@media (min-width: 768px) {
-  .qt-sister__action {
-    align-items: flex-end;
-    text-align: right;
-  }
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .qt-sister__logo {
-  height: 40px;
+  max-height: 120px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.8;
 }
 
 .qt-sister__btn {
@@ -269,7 +259,6 @@
   height: 60px;
   width: auto;
   margin-bottom: var(--qt-space-4);
-  filter: brightness(0) invert(1);
 }
 
 .qt-footer__site-name {

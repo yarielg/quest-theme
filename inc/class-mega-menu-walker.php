@@ -11,7 +11,11 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 		$url      = $element->url ?? '';
 		$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
-		$this->is_products = ( untrailingslashit( $url ) === untrailingslashit( $shop_url ) );
+		$archive_url = get_post_type_archive_link( 'product' );
+		$this->is_products = (
+			untrailingslashit( $url ) === untrailingslashit( $shop_url )
+			|| ( $archive_url && untrailingslashit( $url ) === untrailingslashit( $archive_url ) )
+		);
 
 		// For Products: remove children so WP doesn't render them
 		if ( $this->is_products && $depth === 0 ) {
@@ -109,7 +113,7 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 			$children = get_terms( [
 				'taxonomy'   => 'product_cat',
-				'hide_empty' => true,
+				'hide_empty' => false,
 				'parent'     => $cat->term_id,
 				'orderby'    => 'menu_order',
 				'order'      => 'ASC',
