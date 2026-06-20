@@ -319,7 +319,7 @@
    Page/post content
    -------------------------------------------------------------------------- */
 .qt-entry-content {
-  max-width: 880px;
+  width: 100%;
 }
 
 .qt-entry-content p,

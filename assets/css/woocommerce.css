@@ -345,6 +345,54 @@
   letter-spacing: 0.03em;
 }
 
+/* Price state labels (from quest-asap plugin) */
+.quest-login-price,
+.quest-contact-price,
+.quest-pending-price,
+.quest-no-sku,
+.quest-price {
+  display: block;
+  padding: var(--qt-space-2) var(--qt-space-4);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.quest-login-price,
+.quest-contact-price {
+  color: var(--qt-color-primary);
+  text-decoration: none;
+}
+
+.quest-login-price:hover,
+.quest-contact-price:hover {
+  color: var(--qt-color-primary-dark);
+  text-decoration: underline;
+}
+
+.quest-pending-price {
+  color: var(--qt-color-warning);
+}
+
+.quest-no-sku {
+  color: var(--qt-color-muted);
+}
+
+.quest-price__loading {
+  color: var(--qt-color-muted);
+}
+
+.quest-price__value {
+  color: var(--qt-color-success);
+  font-size: var(--qt-text-base);
+}
+
+.quest-price__call {
+  color: var(--qt-color-primary);
+}
+
 /* View Details CTA */
 .qt-loop-footer {
   margin-top: auto;

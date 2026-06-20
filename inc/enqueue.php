@@ -32,6 +32,18 @@ function quest_scripts(): void {
 		wp_enqueue_style( 'quest-pages', QUEST_URL . '/assets/css/pages.css', [ 'quest-components' ], $ver );
 	}
 
+	if ( is_page_template( 'page-distributor-locator.php' ) ) {
+		wp_enqueue_style( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', [], '1.9.4' );
+		wp_enqueue_script( 'leaflet', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', [], '1.9.4', true );
+		wp_enqueue_script(
+			'quest-distributor-locator',
+			QUEST_URL . '/assets/js/distributor-locator.js',
+			[ 'leaflet' ],
+			$ver,
+			[ 'strategy' => 'defer', 'in_footer' => true ]
+		);
+	}
+
 	if ( is_page_template( 'page-resources.php' ) ) {
 		wp_enqueue_script(
 			'quest-pdf-preview',
