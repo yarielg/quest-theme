@@ -27,25 +27,30 @@ if ( empty( $products ) ) {
 			<?php foreach ( $products as $product ) :
 				$thumb   = $product->get_image_id();
 				$img_url = $thumb ? wp_get_attachment_image_url( $thumb, 'quest-product-card' ) : wc_placeholder_img_src( 'quest-product-card' );
-				$cats    = wp_get_post_terms( $product->get_id(), 'product_cat', [ 'fields' => 'names' ] );
-				$cat     = ! is_wp_error( $cats ) && ! empty( $cats ) ? $cats[0] : '';
 			?>
-				<a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="qt-new-product-card">
-					<div class="qt-new-product-card__badge"><?php esc_html_e( 'New', 'quest' ); ?></div>
-					<div class="qt-new-product-card__img">
+				<a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="qt-product-card qt-tabs__card">
+					<div class="qt-product-card__img-wrap">
 						<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $product->get_name() ); ?>" loading="lazy">
+						<span class="qt-product-card__badge" style="background:var(--qt-color-success);"><?php esc_html_e( 'New', 'quest' ); ?></span>
 					</div>
-					<div class="qt-new-product-card__info">
-						<?php if ( $cat ) : ?>
-							<span class="qt-new-product-card__cat"><?php echo esc_html( $cat ); ?></span>
-						<?php endif; ?>
-						<h3 class="qt-new-product-card__name"><?php echo esc_html( $product->get_name() ); ?></h3>
+					<div class="qt-product-card__info">
 						<?php if ( $product->get_sku() ) : ?>
-							<span class="qt-new-product-card__sku">SKU: <?php echo esc_html( $product->get_sku() ); ?></span>
+							<span class="qt-product-card__sku"><?php echo esc_html( $product->get_sku() ); ?></span>
 						<?php endif; ?>
+						<h3 class="qt-product-card__name"><?php echo esc_html( $product->get_name() ); ?></h3>
+						<span class="qt-product-card__view">
+							<?php esc_html_e( 'View Details', 'quest' ); ?>
+							<?php echo quest_icon( 'arrow-right', 12 ); ?>
+						</span>
 					</div>
 				</a>
 			<?php endforeach; ?>
+		</div>
+		<div class="qt-section__footer">
+			<a href="<?php echo esc_url( quest_shop_url() ); ?>" class="qt-btn qt-btn--outline">
+				<?php esc_html_e( 'View All Products', 'quest' ); ?>
+				<?php echo quest_icon( 'arrow-right', 16 ); ?>
+			</a>
 		</div>
 	</div>
 </section>
