@@ -12,3 +12,4 @@ require_once QUEST_DIR . '/inc/woocommerce.php';
 require_once QUEST_DIR . '/inc/acf-fields.php';
 require_once QUEST_DIR . '/inc/class-mega-menu-walker.php';
 require_once QUEST_DIR . '/inc/ajax-search.php';
+require_once QUEST_DIR . '/inc/contact-form.php';

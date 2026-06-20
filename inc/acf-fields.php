@@ -533,6 +533,124 @@ function quest_register_acf_fields(): void {
 		'menu_order' => 0,
 	] );
 	// -----------------------------------------------------------------------
+	// Contact Us page template
+	// -----------------------------------------------------------------------
+	acf_add_local_field_group( [
+		'key'      => 'group_quest_contact_page',
+		'title'    => 'Contact Us Page',
+		'fields'   => [
+			[
+				'key'          => 'field_contact_departments',
+				'label'        => 'Department Contacts',
+				'name'         => 'contact_departments',
+				'type'         => 'repeater',
+				'layout'       => 'block',
+				'button_label' => 'Add Department',
+				'sub_fields'   => [
+					[
+						'key'      => 'field_dept_department',
+						'label'    => 'Department',
+						'name'     => 'department',
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '25' ],
+					],
+					[
+						'key'      => 'field_dept_name',
+						'label'    => 'Contact Name',
+						'name'     => 'name',
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '25' ],
+					],
+					[
+						'key'      => 'field_dept_email',
+						'label'    => 'Email',
+						'name'     => 'email',
+						'type'     => 'email',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '25' ],
+					],
+					[
+						'key'     => 'field_dept_extension',
+						'label'   => 'Extension',
+						'name'    => 'extension',
+						'type'    => 'text',
+						'wrapper' => [ 'width' => '25' ],
+					],
+				],
+			],
+			[
+				'key'   => 'field_contact_toll_free',
+				'label' => 'Toll Free Phone',
+				'name'  => 'contact_toll_free',
+				'type'  => 'text',
+				'wrapper' => [ 'width' => '33' ],
+			],
+			[
+				'key'   => 'field_contact_fax',
+				'label' => 'Fax Number',
+				'name'  => 'contact_fax',
+				'type'  => 'text',
+				'wrapper' => [ 'width' => '33' ],
+			],
+			[
+				'key'   => 'field_contact_hours',
+				'label' => 'Hours of Operation',
+				'name'  => 'contact_hours',
+				'type'  => 'textarea',
+				'rows'  => 3,
+				'wrapper' => [ 'width' => '33' ],
+			],
+			[
+				'key'          => 'field_contact_map_embed',
+				'label'        => 'Google Maps Embed',
+				'name'         => 'contact_map_embed',
+				'type'         => 'textarea',
+				'rows'         => 3,
+				'instructions' => 'Paste the Google Maps embed iframe code here.',
+			],
+		],
+		'location' => [ [ [
+			'param'    => 'page_template',
+			'operator' => '==',
+			'value'    => 'page-contact.php',
+		] ] ],
+	] );
+
+	// -----------------------------------------------------------------------
+	// Turnstile / Security (Global Settings page)
+	// -----------------------------------------------------------------------
+	acf_add_local_field_group( [
+		'key'      => 'group_quest_security',
+		'title'    => 'Form Security',
+		'fields'   => [
+			[
+				'key'          => 'field_turnstile_site_key',
+				'label'        => 'Cloudflare Turnstile Site Key',
+				'name'         => 'turnstile_site_key',
+				'type'         => 'text',
+				'instructions' => 'Get your site key from https://dash.cloudflare.com/turnstile',
+				'wrapper'      => [ 'width' => '50' ],
+			],
+			[
+				'key'          => 'field_turnstile_secret_key',
+				'label'        => 'Cloudflare Turnstile Secret Key',
+				'name'         => 'turnstile_secret_key',
+				'type'         => 'text',
+				'instructions' => 'Server-side secret key for validation.',
+				'wrapper'      => [ 'width' => '50' ],
+			],
+		],
+		'location' => [ [ [
+			'param'    => 'options_page',
+			'operator' => '==',
+			'value'    => 'quest-theme-settings',
+		] ] ],
+		'menu_order' => 10,
+	] );
+
+	// -----------------------------------------------------------------------
 	// Resources & Brochures page template
 	// -----------------------------------------------------------------------
 	acf_add_local_field_group( [
