@@ -143,6 +143,17 @@
   color: var(--qt-color-primary-dark);
 }
 
+.qt-auth__switch-link {
+  color: var(--qt-color-primary);
+  font-weight: var(--qt-weight-bold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.qt-auth__switch-link:hover {
+  color: var(--qt-color-primary-dark);
+}
+
 /* Auth form fields */
 .qt-auth__form {
   display: flex;
