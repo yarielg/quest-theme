@@ -94,6 +94,29 @@
     }
   }
 
+  // Resource filters
+  document.querySelectorAll('[data-component="resource-filters"]').forEach(function (container) {
+    var buttons = container.querySelectorAll('.qt-resources-filter');
+    var cards = document.querySelectorAll('.qt-resource-card[data-category]');
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = this.getAttribute('data-filter');
+
+        buttons.forEach(function (b) { b.classList.remove('qt-resources-filter--active'); });
+        this.classList.add('qt-resources-filter--active');
+
+        cards.forEach(function (card) {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.classList.remove('qt-resource-card--hidden');
+          } else {
+            card.classList.add('qt-resource-card--hidden');
+          }
+        });
+      });
+    });
+  });
+
   // Product tabs
   document.querySelectorAll('[data-component="tabs"]').forEach(function (tabsEl) {
     var buttons = tabsEl.querySelectorAll('.qt-tabs__btn');

@@ -658,7 +658,88 @@
 }
 
 /* --------------------------------------------------------------------------
-   Resources grid
+   Resources — filters + grid
+   -------------------------------------------------------------------------- */
+
+/* Category filter tabs */
+.qt-resources-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--qt-space-2);
+  margin-bottom: var(--qt-space-8);
+}
+
+.qt-resources-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qt-space-2);
+  padding: var(--qt-space-2) var(--qt-space-5);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qt-color-muted);
+  background: none;
+  border: 2px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-full);
+  cursor: pointer;
+  transition: all var(--qt-transition);
+}
+
+.qt-resources-filter:hover {
+  color: var(--qt-color-primary);
+  border-color: var(--qt-color-primary);
+}
+
+.qt-resources-filter--active {
+  color: #fff;
+  background: var(--qt-color-primary);
+  border-color: var(--qt-color-primary);
+}
+
+.qt-resources-filter__count {
+  font-size: var(--qt-text-xs);
+  opacity: 0.7;
+}
+
+/* Card hidden state */
+.qt-resource-card--hidden {
+  display: none;
+}
+
+/* Video icon */
+.qt-resource-card__icon--video {
+  color: var(--qt-color-primary);
+}
+
+.qt-resource-card__type--video {
+  background: var(--qt-color-primary) !important;
+  color: #fff !important;
+}
+
+/* Description */
+.qt-resource-card__desc {
+  font-size: var(--qt-text-xs);
+  color: var(--qt-color-muted);
+  line-height: 1.4;
+  margin: 0 0 var(--qt-space-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* CTA buttons row */
+.qt-cta__buttons {
+  display: flex;
+  gap: var(--qt-space-4);
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Resources grid (layout)
    -------------------------------------------------------------------------- */
 .qt-resources-page {
   padding: var(--qt-space-10) 0;
