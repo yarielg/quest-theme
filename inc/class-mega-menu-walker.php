@@ -13,6 +13,12 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 		$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' );
 		$this->is_products = ( untrailingslashit( $url ) === untrailingslashit( $shop_url ) );
 
+		// For Products: remove children so WP doesn't render them
+		if ( $this->is_products && $depth === 0 ) {
+			unset( $children_elements[ $element->ID ] );
+			$this->item_has_children = true;
+		}
+
 		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
 
@@ -57,7 +63,6 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 		$output .= '</a>';
 
-		// For Products item: inject the full category tree right after the link, before WP renders its children
 		if ( $depth === 0 && $this->is_products ) {
 			$output .= $this->render_product_categories();
 		}
@@ -65,13 +70,8 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 	public function start_lvl( &$output, $depth = 0, $args = null ) {
 		if ( $depth === 0 ) {
-			if ( $this->is_products ) {
-				// Products: children are hidden — panel already rendered via render_product_categories
-				$output .= '<ul class="qt-mega-menu__hidden-sub" style="display:none">';
-			} else {
-				$output .= '<div class="qt-mega-menu__panel"><div class="qt-container"><div class="qt-mega-menu__panel-inner">';
-				$output .= '<div class="qt-mega-menu__col"><ul class="qt-mega-menu__sub-list">';
-			}
+			$output .= '<div class="qt-mega-menu__panel"><div class="qt-container"><div class="qt-mega-menu__panel-inner">';
+			$output .= '<div class="qt-mega-menu__col"><ul class="qt-mega-menu__sub-list">';
 		} else {
 			$output .= '<ul class="qt-mega-menu__sub-list qt-mega-menu__sub-list--nested">';
 		}
@@ -79,13 +79,7 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 	public function end_lvl( &$output, $depth = 0, $args = null ) {
 		if ( $depth === 0 ) {
-			if ( $this->is_products ) {
-				$output .= '</ul>';
-				// Close the panel that was opened in render_product_categories
-				$output .= '</div></div></div>';
-			} else {
-				$output .= '</ul></div></div></div></div>';
-			}
+			$output .= '</ul></div></div></div></div>';
 		} else {
 			$output .= '</ul>';
 		}
@@ -165,7 +159,7 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 		}
 
 		$html .= '</div>';
-		// Don't close the panel yet — WP's start_lvl/end_lvl will add the Quick Links column and close it
+		$html .= '</div></div></div>';
 
 		return $html;
 	}

@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-define( 'QUEST_VERSION', '1.1.0' );
+define( 'QUEST_VERSION', '1.2.0' );
 define( 'QUEST_DIR', get_template_directory() );
 define( 'QUEST_URL', get_template_directory_uri() );
 

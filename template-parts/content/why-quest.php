@@ -16,7 +16,7 @@ if ( function_exists( 'have_rows' ) && have_rows( 'why_quest_features', 'option'
 
 if ( empty( $features ) ) {
 	$features = [
-		[ 'title' => 'Industry Expertise',  'description' => '40+ years of experience in structured cabling and connectivity solutions for enterprise environments.', 'icon' => 'expertise' ],
+		[ 'title' => 'Industry Expertise',  'description' => '25+ years of experience in structured cabling and connectivity solutions for enterprise environments.', 'icon' => 'expertise' ],
 		[ 'title' => 'Quality Certified',    'description' => 'All products meet or exceed industry standards with UL listings, ETL verifications, and compliance certifications.', 'icon' => 'certified' ],
 		[ 'title' => 'Dealer Pricing',       'description' => 'Competitive tiered pricing for authorized dealers and distributors with volume discounts.', 'icon' => 'pricing' ],
 		[ 'title' => 'In-Stock & Ready',     'description' => 'Extensive inventory with same-day shipping on thousands of SKUs from our distribution center.', 'icon' => 'shipping' ],

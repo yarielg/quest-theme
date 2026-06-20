@@ -5,6 +5,44 @@
 /* --------------------------------------------------------------------------
    Page banner (used by page templates)
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Page breadcrumb (non-WooCommerce pages)
+   -------------------------------------------------------------------------- */
+.qt-page-breadcrumb {
+  background: var(--qt-color-surface);
+  padding: var(--qt-space-3) 0;
+  border-bottom: 1px solid var(--qt-color-border);
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item {
+  color: var(--qt-color-muted);
+  font-size: var(--qt-text-sm);
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item a {
+  color: var(--qt-color-muted);
+  text-decoration: none;
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item a:hover {
+  color: var(--qt-color-primary);
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item::after {
+  content: '/';
+  margin-left: var(--qt-space-2);
+  color: var(--qt-color-border);
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item:last-child::after {
+  display: none;
+}
+
+.qt-page-breadcrumb .qt-breadcrumb__item:last-child {
+  color: var(--qt-color-dark);
+  font-weight: var(--qt-weight-medium);
+}
+
 .qt-page-banner {
   background: var(--qt-color-dark);
   padding: var(--qt-space-10) 0;

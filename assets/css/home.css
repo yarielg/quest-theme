@@ -282,6 +282,34 @@
 }
 
 /* --------------------------------------------------------------------------
+   Category section decorative accent
+   -------------------------------------------------------------------------- */
+.qt-categories {
+  position: relative;
+  background-color: var(--qt-color-surface);
+  overflow: hidden;
+}
+
+.qt-categories::before {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 420px;
+  height: 100%;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='800' viewBox='0 0 420 800' fill='none'%3E%3C!-- Main ethernet cable bundle --%3E%3Cpath d='M200 0 C200 80 200 80 200 120 C200 160 120 160 120 200 C120 240 120 280 120 320 C120 360 200 360 200 400 C200 440 200 480 200 520 C200 560 140 560 140 600 C140 640 140 680 140 720 C140 760 200 760 200 800' stroke='%23CC0000' stroke-width='6' stroke-linecap='round'/%3E%3C!-- Parallel cable --%3E%3Cpath d='M215 0 C215 80 215 80 215 120 C215 160 135 160 135 200 C135 240 135 280 135 320 C135 360 215 360 215 400 C215 440 215 480 215 520 C215 560 155 560 155 600 C155 640 155 680 155 720 C155 760 215 760 215 800' stroke='%23CC0000' stroke-width='4' stroke-linecap='round'/%3E%3C!-- Thin parallel cable --%3E%3Cpath d='M230 0 C230 80 230 80 230 120 C230 160 150 160 150 200 C150 240 150 280 150 320 C150 360 230 360 230 400 C230 440 230 480 230 520 C230 560 170 560 170 600 C170 640 170 680 170 720 C170 760 230 760 230 800' stroke='%23CC0000' stroke-width='2.5' stroke-linecap='round'/%3E%3C!-- Branch cable going right --%3E%3Cpath d='M215 200 C260 200 300 200 340 180 C380 160 380 120 380 100' stroke='%23CC0000' stroke-width='4' stroke-linecap='round'/%3E%3C!-- Branch cable going right lower --%3E%3Cpath d='M215 520 C260 520 310 520 350 540 C390 560 390 600 390 640' stroke='%23CC0000' stroke-width='3' stroke-linecap='round'/%3E%3C!-- RJ45 connector shapes --%3E%3Crect x='185' y='115' width='45' height='22' rx='3' stroke='%23CC0000' stroke-width='2' fill='none'/%3E%3Cline x1='193' y1='119' x2='193' y2='133' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='200' y1='119' x2='200' y2='133' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='207' y1='119' x2='207' y2='133' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='214' y1='119' x2='214' y2='133' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='221' y1='119' x2='221' y2='133' stroke='%23CC0000' stroke-width='1.5'/%3E%3C!-- RJ45 connector lower --%3E%3Crect x='185' y='395' width='45' height='22' rx='3' stroke='%23CC0000' stroke-width='2' fill='none'/%3E%3Cline x1='193' y1='399' x2='193' y2='413' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='200' y1='399' x2='200' y2='413' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='207' y1='399' x2='207' y2='413' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='214' y1='399' x2='214' y2='413' stroke='%23CC0000' stroke-width='1.5'/%3E%3Cline x1='221' y1='399' x2='221' y2='413' stroke='%23CC0000' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.qt-categories > .qt-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
    Category grid — image overlay cards
    -------------------------------------------------------------------------- */
 .qt-categories__grid {

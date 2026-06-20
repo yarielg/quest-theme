@@ -5,6 +5,7 @@ get_header();
 ?>
 
 <main id="qt-main" class="qt-main">
+	<?php get_template_part( 'template-parts/content/breadcrumb' ); ?>
 	<div class="qt-container">
 
 		<?php while ( have_posts() ) : the_post(); ?>

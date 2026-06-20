@@ -83,6 +83,22 @@
 .qt-footer {
   background-color: var(--qt-color-dark);
   color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.qt-footer::before {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 350px;
+  height: 100%;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='600' viewBox='0 0 350 600' fill='none'%3E%3Cpath d='M160 0 C160 60 160 60 160 100 C160 140 100 140 100 180 C100 220 100 260 100 300 C100 340 160 340 160 380 C160 420 160 460 160 500 C160 540 110 540 110 580 C110 590 110 600 110 600' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M175 0 C175 60 175 60 175 100 C175 140 115 140 115 180 C115 220 115 260 115 300 C115 340 175 340 175 380 C175 420 175 460 175 500 C175 540 125 540 125 580 C125 590 125 600 125 600' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M175 180 C210 180 250 180 280 160 C310 140 310 110 310 80' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M175 400 C210 400 260 400 290 420 C320 440 320 470 320 500' stroke='%23fff' stroke-width='2.5' stroke-linecap='round'/%3E%3Crect x='145' y='95' width='40' height='18' rx='3' stroke='%23fff' stroke-width='1.5' fill='none'/%3E%3Cline x1='152' y1='99' x2='152' y2='109' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='158' y1='99' x2='158' y2='109' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='164' y1='99' x2='164' y2='109' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='170' y1='99' x2='170' y2='109' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='176' y1='99' x2='176' y2='109' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
 }
 
 .qt-footer a {
@@ -108,13 +124,7 @@
 
 @media (min-width: 768px) {
   .qt-footer__grid {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-}
-
-@media (min-width: 1024px) {
-  .qt-footer__grid {
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
   }
 }
 
@@ -125,9 +135,10 @@
 
 .qt-footer__brand img,
 .qt-footer__brand .custom-logo {
-  height: 40px;
+  height: 60px;
   width: auto;
   margin-bottom: var(--qt-space-4);
+  filter: brightness(0) invert(1);
 }
 
 .qt-footer__site-name {
@@ -185,6 +196,12 @@
   letter-spacing: 0.05em;
   color: #fff;
   margin-bottom: var(--qt-space-4);
+}
+
+.qt-footer__heading--contact {
+  margin-top: var(--qt-space-6);
+  padding-top: var(--qt-space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .qt-footer__links {

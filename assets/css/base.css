@@ -219,6 +219,164 @@ p {
 }
 
 /* --------------------------------------------------------------------------
+   6. Scroll reveal animations (CSS-only, no JS overhead)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .qt-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .qt-reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .qt-reveal-delay-1 { transition-delay: 0.1s; }
+  .qt-reveal-delay-2 { transition-delay: 0.2s; }
+  .qt-reveal-delay-3 { transition-delay: 0.3s; }
+  .qt-reveal-delay-4 { transition-delay: 0.4s; }
+}
+
+/* --------------------------------------------------------------------------
+   7. Back to top button
+   -------------------------------------------------------------------------- */
+.qt-back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--qt-z-toast);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--qt-color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: var(--qt-shadow-md);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+  pointer-events: none;
+}
+
+.qt-back-to-top--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.qt-back-to-top:hover {
+  background: var(--qt-color-primary-dark);
+}
+
+@media (max-width: 1023px) {
+  .qt-back-to-top {
+    bottom: 70px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Loading skeleton animation
+   -------------------------------------------------------------------------- */
+@keyframes qt-skeleton {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.qt-skeleton {
+  background: linear-gradient(90deg, var(--qt-color-surface) 0%, #e8e8e8 50%, var(--qt-color-surface) 100%);
+  background-size: 200px 100%;
+  animation: qt-skeleton 1.5s ease infinite;
+  border-radius: var(--qt-radius-sm);
+}
+
+/* Price loading skeleton */
+.quest-price__loading {
+  display: inline-block;
+  width: 80px;
+  height: 16px;
+  background: linear-gradient(90deg, rgba(200,200,200,0.3) 0%, rgba(200,200,200,0.5) 50%, rgba(200,200,200,0.3) 100%);
+  background-size: 200px 100%;
+  animation: qt-skeleton 1.5s ease infinite;
+  border-radius: var(--qt-radius-sm);
+  color: transparent;
+  font-size: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. Product image hover zoom
+   -------------------------------------------------------------------------- */
+.qt-zoom-wrap {
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.qt-zoom-lens {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-repeat: no-repeat;
+  background-size: 200%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.qt-zoom-wrap:hover .qt-zoom-lens {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   10. Sticky Add to Quote bar
+   -------------------------------------------------------------------------- */
+.qt-sticky-quote {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--qt-z-header);
+  background: var(--qt-color-dark);
+  border-top: 2px solid var(--qt-color-primary);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.qt-sticky-quote--visible {
+  transform: translateY(0);
+}
+
+.qt-sticky-quote__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--qt-space-3) var(--qt-container-pad);
+  max-width: var(--qt-container-max);
+  margin: 0 auto;
+}
+
+.qt-sticky-quote__name {
+  color: #fff;
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: var(--qt-space-4);
+}
+
+.qt-sticky-quote__btn {
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
    6. Responsive breakpoints reference (mobile-first)
    --------------------------------------------------------------------------
    480px  — small phone landscape

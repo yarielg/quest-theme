@@ -316,4 +316,157 @@
       track.classList.toggle('qt-tabs__carousel--shifted');
     });
   });
+
+  // Animated number counters
+  if ('IntersectionObserver' in window) {
+    var counters = document.querySelectorAll('.qt-why__stat-number');
+    if (counters.length) {
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var text = el.textContent.trim();
+          var match = text.match(/^([\d,]+)(\+?)$/);
+          if (!match) return;
+
+          var target = parseInt(match[1].replace(/,/g, ''), 10);
+          var suffix = match[2] || '';
+          var duration = 1500;
+          var start = 0;
+          var startTime = null;
+
+          function animate(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = Math.floor(eased * target);
+            el.textContent = current.toLocaleString() + suffix;
+            if (progress < 1) requestAnimationFrame(animate);
+          }
+
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function (el) { counterObserver.observe(el); });
+    }
+  }
+
+  // Back to top button
+  var backToTop = document.createElement('button');
+  backToTop.className = 'qt-back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
+  document.body.appendChild(backToTop);
+
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  var backToTopVisible = false;
+  window.addEventListener('scroll', function () {
+    var show = window.scrollY > 400;
+    if (show !== backToTopVisible) {
+      backToTopVisible = show;
+      backToTop.classList.toggle('qt-back-to-top--visible', show);
+    }
+  }, { passive: true });
+
+  // Product image hover zoom
+  var productImg = document.querySelector('.woocommerce div.product div.images .woocommerce-product-gallery__image img');
+  if (productImg) {
+    var zoomWrap = productImg.closest('.woocommerce-product-gallery__image') || productImg.parentElement;
+    zoomWrap.classList.add('qt-zoom-wrap');
+
+    var lens = document.createElement('div');
+    lens.className = 'qt-zoom-lens';
+    lens.hidden = true;
+    zoomWrap.appendChild(lens);
+
+    zoomWrap.addEventListener('mouseenter', function () {
+      lens.hidden = false;
+      lens.style.backgroundImage = 'url(' + (productImg.dataset.largeImage || productImg.src) + ')';
+    });
+
+    zoomWrap.addEventListener('mouseleave', function () {
+      lens.hidden = true;
+    });
+
+    zoomWrap.addEventListener('mousemove', function (e) {
+      if (lens.hidden) return;
+      var rect = zoomWrap.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      lens.style.backgroundPosition = x + '% ' + y + '%';
+    });
+  }
+
+  // Sticky Add to Quote bar on single product
+  var quoteActions = document.querySelector('.quest-quote-actions');
+  var stickyBar = null;
+  if (quoteActions) {
+    var productName = document.querySelector('.product_title');
+    stickyBar = document.createElement('div');
+    stickyBar.className = 'qt-sticky-quote';
+    stickyBar.innerHTML = '<div class="qt-container qt-sticky-quote__inner">'
+      + '<span class="qt-sticky-quote__name">' + (productName ? productName.textContent : '') + '</span>'
+      + '<button type="button" class="qt-btn qt-btn--primary qt-btn--sm qt-sticky-quote__btn">Add to Quote</button>'
+      + '</div>';
+    document.body.appendChild(stickyBar);
+
+    stickyBar.querySelector('.qt-sticky-quote__btn').addEventListener('click', function () {
+      var btn = quoteActions.querySelector('.quest-add-to-quote');
+      if (btn) btn.click();
+    });
+
+    var stickyVisible = false;
+    window.addEventListener('scroll', function () {
+      var rect = quoteActions.getBoundingClientRect();
+      var show = rect.bottom < 0;
+      if (show !== stickyVisible) {
+        stickyVisible = show;
+        stickyBar.classList.toggle('qt-sticky-quote--visible', show);
+      }
+    }, { passive: true });
+  }
+
+  // Scroll reveal — IntersectionObserver (zero performance cost)
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var revealTargets = [
+      '.qt-section__header',
+      '.qt-cat-card',
+      '.qt-why__stat',
+      '.qt-why__card',
+      '.qt-new-product-card',
+      '.qt-product-card',
+      '.qt-tabs__card',
+      '.qt-dept-card',
+      '.qt-warranty-card',
+      '.qt-affil-card',
+      '.qt-info-card',
+      '.qt-cta__content',
+      '.qt-cta__media',
+      '.qt-partners__logo',
+      '.qt-qwa-hero__video',
+      '.qt-qwa-hero__content',
+      '.qt-locator-card'
+    ];
+
+    var allEls = document.querySelectorAll(revealTargets.join(','));
+    allEls.forEach(function (el) {
+      el.classList.add('qt-reveal');
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('qt-reveal--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    allEls.forEach(function (el) { observer.observe(el); });
+  }
 })();
