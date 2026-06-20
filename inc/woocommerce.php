@@ -16,10 +16,7 @@ function quest_apply_catalog_mode(): void {
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 15 );
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 
-	// Hide prices
-	add_filter( 'woocommerce_get_price_html', '__return_empty_string' );
-
-	// Disable cart and checkout pages
+	// Disable purchasing
 	add_filter( 'woocommerce_is_purchasable', '__return_false' );
 
 	// Redirect cart/checkout to shop

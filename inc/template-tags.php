@@ -1,20 +1,16 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Check if catalog mode is enabled.
- */
-function quest_is_catalog_mode(): bool {
-	if ( ! function_exists( 'get_field' ) ) {
-		return true;
+if ( ! function_exists( 'quest_is_catalog_mode' ) ) {
+	function quest_is_catalog_mode(): bool {
+		if ( ! function_exists( 'get_field' ) ) {
+			return true;
+		}
+		$val = get_field( 'catalog_mode', 'option' );
+		return $val === null ? true : (bool) $val;
 	}
-	$val = get_field( 'catalog_mode', 'option' );
-	return $val === null ? true : (bool) $val;
 }
 
-/**
- * Check if current page is a WooCommerce page.
- */
 function quest_is_woo_page(): bool {
 	if ( ! function_exists( 'is_woocommerce' ) ) {
 		return false;
@@ -46,24 +42,22 @@ function quest_option_text( string $key, string $default = '', bool $echo = true
 	return $val;
 }
 
-/**
- * Get the WooCommerce account page URL.
- */
-function quest_account_url(): string {
-	if ( function_exists( 'wc_get_account_endpoint_url' ) ) {
-		return wc_get_account_endpoint_url( 'dashboard' );
+if ( ! function_exists( 'quest_account_url' ) ) {
+	function quest_account_url(): string {
+		if ( function_exists( 'wc_get_account_endpoint_url' ) ) {
+			return wc_get_account_endpoint_url( 'dashboard' );
+		}
+		return home_url( '/my-account/' );
 	}
-	return home_url( '/my-account/' );
 }
 
-/**
- * Get the WooCommerce shop URL.
- */
-function quest_shop_url(): string {
-	if ( function_exists( 'wc_get_page_permalink' ) ) {
-		return wc_get_page_permalink( 'shop' );
+if ( ! function_exists( 'quest_shop_url' ) ) {
+	function quest_shop_url(): string {
+		if ( function_exists( 'wc_get_page_permalink' ) ) {
+			return wc_get_page_permalink( 'shop' );
+		}
+		return home_url( '/shop/' );
 	}
-	return home_url( '/shop/' );
 }
 
 /**
