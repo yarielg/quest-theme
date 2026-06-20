@@ -7,7 +7,16 @@ $email = quest_option_text( 'company_email', 'info@questtechnologyintl.com', fal
 
 <div class="qt-top-bar">
 	<div class="qt-container qt-top-bar__inner">
-		<div class="qt-top-bar__left"></div>
+		<div class="qt-top-bar__left">
+			<?php
+			$hours = function_exists( 'get_field' ) ? get_field( 'contact_hours', 'option' ) : '';
+			if ( ! $hours ) $hours = 'Mon–Fri 8:00 AM – 5:00 PM EST';
+			?>
+			<span class="qt-top-bar__link">
+				<?php echo quest_icon( 'grid', 14 ); ?>
+				<span><?php echo esc_html( $hours ); ?></span>
+			</span>
+		</div>
 		<div class="qt-top-bar__right">
 			<?php if ( $phone ) : ?>
 				<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>" class="qt-top-bar__link">
