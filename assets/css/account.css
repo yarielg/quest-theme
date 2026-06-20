@@ -685,6 +685,12 @@
   display: none;
 }
 
+/* Account page spacing */
+.woocommerce-account .qt-main {
+  padding-top: var(--qt-space-8);
+  padding-bottom: var(--qt-space-8);
+}
+
 /* When not logged in — no grid, just centered content */
 .qt-main--account .qt-auth {
   max-width: 560px;

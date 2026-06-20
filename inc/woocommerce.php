@@ -193,10 +193,17 @@ add_action( 'woocommerce_single_product_summary', function (): void {
 	}
 }, 3 );
 
-// SKU highlight right after meta
+// Contact CTA — only for users who can't see pricing
 add_action( 'woocommerce_single_product_summary', function (): void {
-	global $product;
 	if ( ! quest_is_catalog_mode() ) return;
+	if ( is_user_logged_in() ) {
+		$user = wp_get_current_user();
+		$is_dealer = in_array( 'quest_dealer', (array) $user->roles, true )
+			|| in_array( 'administrator', (array) $user->roles, true );
+		if ( $is_dealer && get_user_meta( $user->ID, 'price_list', true ) ) {
+			return;
+		}
+	}
 	echo '<div class="qt-single-contact-cta">';
 	echo '<p>' . esc_html__( 'Interested in this product?', 'quest' ) . '</p>';
 	echo '<a href="' . esc_url( home_url( '/contact-us/' ) ) . '" class="qt-btn qt-btn--primary">';
@@ -205,18 +212,6 @@ add_action( 'woocommerce_single_product_summary', function (): void {
 	echo '</a></div>';
 }, 20 );
 
-// Product actions bar (share, print)
-add_action( 'woocommerce_single_product_summary', function (): void {
-	global $product;
-	echo '<div class="qt-single-actions">';
-	echo '<button type="button" class="qt-single-action" onclick="window.print()">';
-	echo quest_icon( 'catalog', 16 ) . ' ' . esc_html__( 'Print', 'quest' );
-	echo '</button>';
-	echo '<button type="button" class="qt-single-action" onclick="navigator.clipboard.writeText(window.location.href).then(function(){alert(\'Link copied!\')})">';
-	echo quest_icon( 'mail', 16 ) . ' ' . esc_html__( 'Share', 'quest' );
-	echo '</button>';
-	echo '</div>';
-}, 35 );
 
 
 // Add "View Details" CTA at the bottom

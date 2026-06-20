@@ -799,8 +799,18 @@
   transition: transform var(--qt-transition-slow);
 }
 
-.qt-resource-card:hover .qt-resource-card__preview img {
+.qt-resource-card:hover .qt-resource-card__preview img,
+.qt-resource-card:hover .qt-resource-card__pdf-canvas {
   transform: scale(1.03);
+}
+
+/* PDF canvas preview */
+.qt-resource-card__pdf-canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--qt-transition-slow);
 }
 
 /* File type icon placeholder */

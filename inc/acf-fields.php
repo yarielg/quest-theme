@@ -875,7 +875,7 @@ function quest_register_acf_fields(): void {
 						'choices' => [
 							''                   => '— None —',
 							'Catalogs'           => 'Catalogs',
-							'Brochures & Flyers' => 'Brochures & Flyers',
+							'Brochures'          => 'Brochures',
 							'How-To Videos'      => 'How-To Videos',
 							'Data Sheets'        => 'Data Sheets',
 							'Guides'             => 'Guides',

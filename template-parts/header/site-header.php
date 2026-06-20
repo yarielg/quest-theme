@@ -57,6 +57,24 @@ $cart_count  = function_exists( 'WC' ) && WC()->cart ? WC()->cart->get_cart_cont
 				aria-label="<?php esc_attr_e( 'Search products', 'quest' ); ?>"
 			><?php echo quest_icon( 'search', 22 ); ?></a>
 
+			<?php
+			if ( is_user_logged_in() ) :
+				$qt_user = wp_get_current_user();
+				$qt_is_dealer = in_array( 'quest_dealer', (array) $qt_user->roles, true )
+					|| in_array( 'administrator', (array) $qt_user->roles, true );
+				if ( $qt_is_dealer && ! in_array( 'quest_pending', (array) $qt_user->roles, true ) ) :
+					$qt_quote_items = get_user_meta( $qt_user->ID, 'quest_quote_items', true );
+					$qt_quote_count = is_array( $qt_quote_items ) ? count( $qt_quote_items ) : 0;
+					$qt_quote_url   = function_exists( 'wc_get_account_endpoint_url' ) ? wc_get_account_endpoint_url( 'quote' ) : home_url( '/my-account/quote/' );
+			?>
+				<a href="<?php echo esc_url( $qt_quote_url ); ?>" class="qt-header__icon-btn qt-header__quote-btn" aria-label="<?php esc_attr_e( 'My Quote', 'quest' ); ?>">
+					<?php echo quest_icon( 'catalog', 22 ); ?>
+					<?php if ( $qt_quote_count > 0 ) : ?>
+						<span class="qt-header__quote-count"><?php echo esc_html( $qt_quote_count ); ?></span>
+					<?php endif; ?>
+				</a>
+			<?php endif; endif; ?>
+
 			<div class="qt-header__account-wrap">
 				<button type="button" class="qt-header__account-link js-account-toggle" aria-expanded="false" aria-controls="qt-account-dropdown">
 					<?php echo quest_icon( 'account', 22 ); ?>
@@ -68,6 +86,10 @@ $cart_count  = function_exists( 'WC' ) && WC()->cart ? WC()->cart->get_cart_cont
 						<a href="<?php echo esc_url( $account_url ); ?>" class="qt-header__account-item">
 							<?php echo quest_icon( 'account', 16 ); ?>
 							<?php esc_html_e( 'Dashboard', 'quest' ); ?>
+						</a>
+						<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'quote' ) ); ?>" class="qt-header__account-item">
+							<?php echo quest_icon( 'catalog', 16 ); ?>
+							<?php esc_html_e( 'My Quote', 'quest' ); ?>
 						</a>
 						<a href="<?php echo esc_url( wc_get_account_endpoint_url( 'edit-account' ) ); ?>" class="qt-header__account-item">
 							<?php echo quest_icon( 'mail', 16 ); ?>

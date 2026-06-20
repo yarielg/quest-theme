@@ -904,6 +904,79 @@
 }
 
 /* --------------------------------------------------------------------------
+   Quote toast notification
+   -------------------------------------------------------------------------- */
+.quest-quote-toast {
+  position: fixed;
+  bottom: 80px;
+  right: var(--qt-space-4);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: var(--qt-space-4);
+  background: var(--qt-color-dark);
+  color: #fff;
+  padding: var(--qt-space-4) var(--qt-space-5);
+  border-radius: var(--qt-radius-md);
+  box-shadow: var(--qt-shadow-lg);
+  max-width: 420px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quest-quote-toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quest-quote-toast__icon {
+  color: var(--qt-color-success);
+  flex-shrink: 0;
+}
+
+.quest-quote-toast__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.quest-quote-toast__text strong {
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-semibold);
+}
+
+.quest-quote-toast__text span {
+  font-size: var(--qt-text-xs);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.quest-quote-toast__link {
+  flex-shrink: 0;
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qt-color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.quest-quote-toast__link:hover {
+  color: #fff;
+}
+
+@media (max-width: 479px) {
+  .quest-quote-toast {
+    left: var(--qt-space-4);
+    right: var(--qt-space-4);
+    max-width: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Stock availability modal
    -------------------------------------------------------------------------- */
 .quest-stock-trigger {

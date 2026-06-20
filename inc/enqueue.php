@@ -32,6 +32,16 @@ function quest_scripts(): void {
 		wp_enqueue_style( 'quest-pages', QUEST_URL . '/assets/css/pages.css', [ 'quest-components' ], $ver );
 	}
 
+	if ( is_page_template( 'page-resources.php' ) ) {
+		wp_enqueue_script(
+			'quest-pdf-preview',
+			QUEST_URL . '/assets/js/pdf-preview.js',
+			[],
+			$ver,
+			[ 'strategy' => 'defer', 'in_footer' => true ]
+		);
+	}
+
 	if ( is_front_page() ) {
 		wp_enqueue_style( 'quest-home', QUEST_URL . '/assets/css/home.css', [ 'quest-components' ], $ver );
 	}

@@ -46,6 +46,8 @@ if ( $has_resources ) {
 				$button_label = __( 'Watch Video', 'quest' );
 			} elseif ( $category === 'Catalogs' ) {
 				$button_label = __( 'Download Catalog', 'quest' );
+			} elseif ( $category === 'Brochures' ) {
+				$button_label = __( 'Download Brochure', 'quest' );
 			} else {
 				$button_label = __( 'Download Resource', 'quest' );
 			}
@@ -55,6 +57,15 @@ if ( $has_resources ) {
 		$preview_url = '';
 		if ( $thumb ) {
 			$preview_url = $thumb['sizes']['medium'] ?? $thumb['url'];
+		} elseif ( $is_video && $external_url ) {
+			// Auto-extract YouTube thumbnail
+			$yt_id = '';
+			if ( preg_match( '/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $external_url, $m ) ) {
+				$yt_id = $m[1];
+			}
+			if ( $yt_id ) {
+				$preview_url = 'https://img.youtube.com/vi/' . $yt_id . '/hqdefault.jpg';
+			}
 		} elseif ( $file && ! empty( $file['ID'] ) ) {
 			$pdf_thumb = wp_get_attachment_image_url( $file['ID'], 'medium' );
 			if ( $pdf_thumb ) {
@@ -132,6 +143,8 @@ if ( $has_resources ) {
 										<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
 										<span class="qt-resource-card__ext"><?php esc_html_e( 'VIDEO', 'quest' ); ?></span>
 									</div>
+								<?php elseif ( $res['has_file'] && $res['file_ext'] === 'PDF' ) : ?>
+									<canvas class="qt-resource-card__pdf-canvas" data-pdf-url="<?php echo esc_url( $res['url'] ); ?>"></canvas>
 								<?php else : ?>
 									<div class="qt-resource-card__icon">
 										<?php echo quest_icon( 'file-pdf', 40 ); ?>

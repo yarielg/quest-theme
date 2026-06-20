@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-define( 'QUEST_VERSION', '1.0.0' );
+define( 'QUEST_VERSION', '1.1.0' );
 define( 'QUEST_DIR', get_template_directory() );
 define( 'QUEST_URL', get_template_directory_uri() );
 
@@ -13,3 +13,4 @@ require_once QUEST_DIR . '/inc/acf-fields.php';
 require_once QUEST_DIR . '/inc/class-mega-menu-walker.php';
 require_once QUEST_DIR . '/inc/ajax-search.php';
 require_once QUEST_DIR . '/inc/contact-form.php';
+require_once QUEST_DIR . '/inc/email-template.php';
