@@ -697,114 +697,287 @@
 }
 
 /* --------------------------------------------------------------------------
-   Why Quest — trust / value proposition section
+   Why Quest — combined trust + stats section (dark)
    -------------------------------------------------------------------------- */
-.qt-why-quest {
-  background-color: var(--qt-color-surface);
+.qt-why {
+  background: var(--qt-color-dark);
+  padding: var(--qt-space-16) 0;
+  color: #fff;
 }
 
-.qt-why-quest__grid {
+/* Stats row */
+.qt-why__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--qt-space-6);
+  text-align: center;
+  margin-bottom: var(--qt-space-12);
+  padding-bottom: var(--qt-space-12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .qt-why__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.qt-why__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qt-why__stat-number {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-4xl);
+  font-weight: var(--qt-weight-black);
+  color: var(--qt-color-primary);
+  line-height: 1;
+  margin-bottom: var(--qt-space-2);
+}
+
+@media (min-width: 768px) {
+  .qt-why__stat-number {
+    font-size: 3.5rem;
+  }
+}
+
+.qt-why__stat-label {
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-medium);
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Heading */
+.qt-why__title {
+  text-align: center;
+  font-size: var(--qt-text-3xl);
+  font-weight: var(--qt-weight-extrabold);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--qt-space-10);
+}
+
+/* Feature cards */
+.qt-why__grid {
+  display: grid;
+  gap: var(--qt-space-5);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .qt-why__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .qt-why__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.qt-why__card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--qt-radius-md);
+  padding: var(--qt-space-6);
+  position: relative;
+  transition: background-color var(--qt-transition), transform var(--qt-transition);
+}
+
+.qt-why__card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.qt-why__card-number {
+  position: absolute;
+  top: var(--qt-space-4);
+  right: var(--qt-space-4);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-3xl);
+  font-weight: var(--qt-weight-black);
+  color: rgba(255, 255, 255, 0.05);
+  line-height: 1;
+}
+
+.qt-why__card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--qt-radius);
+  background: rgba(204, 0, 0, 0.15);
+  color: var(--qt-color-primary);
+  margin-bottom: var(--qt-space-4);
+}
+
+.qt-why__card-title {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-base);
+  font-weight: var(--qt-weight-bold);
+  color: #fff;
+  margin: 0 0 var(--qt-space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.qt-why__card-desc {
+  font-size: var(--qt-text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Partner / Certification logos
+   -------------------------------------------------------------------------- */
+.qt-partners {
+  background: var(--qt-color-surface);
+  padding: var(--qt-space-10) 0;
+}
+
+.qt-partners__label {
+  text-align: center;
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--qt-color-muted);
+  margin: 0 0 var(--qt-space-6);
+}
+
+.qt-partners__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--qt-space-8);
+}
+
+.qt-partners__logo img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: all var(--qt-transition);
+}
+
+.qt-partners__logo:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   New / Latest Products
+   -------------------------------------------------------------------------- */
+.qt-new-products__grid {
   display: grid;
   gap: var(--qt-space-6);
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 480px) {
-  .qt-why-quest__grid {
+  .qt-new-products__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .qt-why-quest__grid {
+  .qt-new-products__grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.qt-why-quest__card {
+.qt-new-product-card {
+  display: flex;
+  flex-direction: column;
   background: var(--qt-color-card);
-  padding: var(--qt-space-8) var(--qt-space-6);
-  border-radius: var(--qt-radius-md);
   border: 1px solid var(--qt-color-border);
-  text-align: center;
+  border-radius: var(--qt-radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
   transition: box-shadow var(--qt-transition), transform var(--qt-transition);
 }
 
-.qt-why-quest__card:hover {
+.qt-new-product-card:hover {
   box-shadow: var(--qt-shadow-md);
   transform: translateY(-4px);
+  color: inherit;
 }
 
-.qt-why-quest__icon {
-  display: inline-flex;
+.qt-new-product-card__badge {
+  position: absolute;
+  top: var(--qt-space-3);
+  left: var(--qt-space-3);
+  z-index: 2;
+  background: var(--qt-color-success);
+  color: #fff;
+  font-family: var(--qt-font-heading);
+  font-size: 0.625rem;
+  font-weight: var(--qt-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: var(--qt-radius-full);
+}
+
+.qt-new-product-card__img {
+  background: #fff;
+  aspect-ratio: 1 / 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(204, 0, 0, 0.08);
-  color: var(--qt-color-primary);
-  margin-bottom: var(--qt-space-5);
+  overflow: hidden;
 }
 
-.qt-why-quest__title {
-  font-family: var(--qt-font-heading);
-  font-size: var(--qt-text-lg);
-  font-weight: var(--qt-weight-bold);
-  margin: 0 0 var(--qt-space-3);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+.qt-new-product-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--qt-space-4);
+  transition: transform var(--qt-transition-slow);
 }
 
-.qt-why-quest__desc {
-  font-size: var(--qt-text-sm);
+.qt-new-product-card:hover .qt-new-product-card__img img {
+  transform: scale(1.06);
+}
+
+.qt-new-product-card__info {
+  padding: var(--qt-space-4);
+}
+
+.qt-new-product-card__cat {
+  display: block;
+  font-size: var(--qt-text-xs);
   color: var(--qt-color-muted);
-  line-height: 1.6;
-  margin: 0;
+  margin-bottom: var(--qt-space-1);
 }
 
-/* --------------------------------------------------------------------------
-   Stats bar
-   -------------------------------------------------------------------------- */
-.qt-stats {
-  background-color: var(--qt-color-primary);
-  padding: var(--qt-space-10) 0;
-}
-
-.qt-stats__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--qt-space-6);
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .qt-stats__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.qt-stats__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.qt-stats__number {
-  font-family: var(--qt-font-heading);
-  font-size: var(--qt-text-4xl);
-  font-weight: var(--qt-weight-black);
-  color: #fff;
-  line-height: 1;
-  margin-bottom: var(--qt-space-2);
-}
-
-.qt-stats__label {
+.qt-new-product-card__name {
   font-size: var(--qt-text-sm);
-  font-weight: var(--qt-weight-medium);
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: var(--qt-weight-semibold);
+  color: var(--qt-color-dark);
+  margin: 0 0 var(--qt-space-1);
+  line-height: 1.4;
+}
+
+.qt-new-product-card__sku {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  color: var(--qt-color-primary);
+  letter-spacing: 0.03em;
 }
 
 

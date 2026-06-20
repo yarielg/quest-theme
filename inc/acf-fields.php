@@ -385,6 +385,17 @@ function quest_register_acf_fields(): void {
 				'instructions' => 'Select which categories appear as tabs. Each tab shows a carousel of 3 products from that category.',
 			],
 
+			// Partner logos
+			[
+				'key'           => 'field_partner_logos',
+				'label'         => 'Partner / Certification Logos',
+				'name'          => 'partner_logos',
+				'type'          => 'gallery',
+				'return_format' => 'array',
+				'preview_size'  => 'thumbnail',
+				'instructions'  => 'Upload partner, affiliation, and certification logos (BICSI, UL, ETL, etc.)',
+			],
+
 			// Why Quest section
 			[
 				'key'   => 'field_why_quest_headline',

@@ -65,11 +65,9 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 
 	public function start_lvl( &$output, $depth = 0, $args = null ) {
 		if ( $depth === 0 ) {
-			// For Products: the panel is already opened in start_el, wrap WP children in a column
 			if ( $this->is_products ) {
-				$output .= '<div class="qt-mega-menu__col qt-mega-menu__col--pages">';
-				$output .= '<h4 class="qt-mega-menu__col-title">' . esc_html__( 'Quick Links', 'quest' ) . '</h4>';
-				$output .= '<ul class="qt-mega-menu__sub-list">';
+				// Products: children are hidden — panel already rendered via render_product_categories
+				$output .= '<ul class="qt-mega-menu__hidden-sub" style="display:none">';
 			} else {
 				$output .= '<div class="qt-mega-menu__panel"><div class="qt-container"><div class="qt-mega-menu__panel-inner">';
 				$output .= '<div class="qt-mega-menu__col"><ul class="qt-mega-menu__sub-list">';
@@ -82,7 +80,7 @@ class Quest_Mega_Menu_Walker extends Walker_Nav_Menu {
 	public function end_lvl( &$output, $depth = 0, $args = null ) {
 		if ( $depth === 0 ) {
 			if ( $this->is_products ) {
-				$output .= '</ul></div>';
+				$output .= '</ul>';
 				// Close the panel that was opened in render_product_categories
 				$output .= '</div></div></div>';
 			} else {
