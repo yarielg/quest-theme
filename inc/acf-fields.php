@@ -603,6 +603,13 @@ function quest_register_acf_fields(): void {
 				'wrapper' => [ 'width' => '33' ],
 			],
 			[
+				'key'          => 'field_contact_form_email',
+				'label'        => 'Form Submissions Email',
+				'name'         => 'contact_form_email',
+				'type'         => 'email',
+				'instructions' => 'Email address that receives contact form submissions. Defaults to the WordPress admin email if empty.',
+			],
+			[
 				'key'          => 'field_contact_map_embed',
 				'label'        => 'Google Maps Embed',
 				'name'         => 'contact_map_embed',
@@ -648,6 +655,162 @@ function quest_register_acf_fields(): void {
 			'value'    => 'quest-theme-settings',
 		] ] ],
 		'menu_order' => 10,
+	] );
+
+	// -----------------------------------------------------------------------
+	// Quality, Warranty & Affiliations page template
+	// -----------------------------------------------------------------------
+	acf_add_local_field_group( [
+		'key'      => 'group_quest_qwa',
+		'title'    => 'Quality, Warranty & Affiliations',
+		'fields'   => [
+			[
+				'key'   => 'field_qwa_subtitle',
+				'label' => 'Page Subtitle',
+				'name'  => 'qwa_subtitle',
+				'type'  => 'text',
+			],
+			// Certifications
+			[
+				'key'   => 'field_qwa_cert_heading',
+				'label' => 'Certifications Heading',
+				'name'  => 'qwa_cert_heading',
+				'type'  => 'text',
+				'default_value' => 'Certifications & Compliance',
+			],
+			[
+				'key'   => 'field_qwa_cert_body',
+				'label' => 'Certifications Text',
+				'name'  => 'qwa_cert_body',
+				'type'  => 'wysiwyg',
+				'tabs'  => 'all',
+				'media_upload' => 0,
+			],
+			[
+				'key'           => 'field_qwa_cert_logos',
+				'label'         => 'Certification Logos',
+				'name'          => 'qwa_cert_logos',
+				'type'          => 'gallery',
+				'return_format' => 'array',
+				'preview_size'  => 'thumbnail',
+				'instructions'  => 'Upload certification logos (UL, ETL, RoHS, etc.)',
+			],
+			// Warranty
+			[
+				'key'   => 'field_qwa_warranty_heading',
+				'label' => 'Warranty Heading',
+				'name'  => 'qwa_warranty_heading',
+				'type'  => 'text',
+				'default_value' => 'Warranty Coverage',
+			],
+			[
+				'key'   => 'field_qwa_warranty_intro',
+				'label' => 'Warranty Intro',
+				'name'  => 'qwa_warranty_intro',
+				'type'  => 'text',
+			],
+			[
+				'key'          => 'field_qwa_warranty_categories',
+				'label'        => 'Warranty Categories',
+				'name'         => 'qwa_warranty_categories',
+				'type'         => 'repeater',
+				'layout'       => 'block',
+				'button_label' => 'Add Category',
+				'sub_fields'   => [
+					[
+						'key'      => 'field_qwa_wc_title',
+						'label'    => 'Title',
+						'name'     => 'title',
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '40' ],
+					],
+					[
+						'key'      => 'field_qwa_wc_coverage',
+						'label'    => 'Coverage',
+						'name'     => 'coverage',
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '20' ],
+						'instructions' => 'e.g. "Lifetime" or "1 Year"',
+					],
+					[
+						'key'     => 'field_qwa_wc_icon',
+						'label'   => 'Icon',
+						'name'    => 'icon',
+						'type'    => 'select',
+						'choices' => [
+							'certified' => 'Shield (certified)',
+							'expertise' => 'Layers (expertise)',
+							'pricing'   => 'Dollar (pricing)',
+							'shipping'  => 'Truck (shipping)',
+						],
+						'wrapper' => [ 'width' => '20' ],
+					],
+					[
+						'key'   => 'field_qwa_wc_description',
+						'label' => 'Description',
+						'name'  => 'description',
+						'type'  => 'textarea',
+						'rows'  => 2,
+					],
+				],
+			],
+			// Affiliations
+			[
+				'key'   => 'field_qwa_affil_heading',
+				'label' => 'Affiliations Heading',
+				'name'  => 'qwa_affil_heading',
+				'type'  => 'text',
+				'default_value' => 'Industry Affiliations',
+			],
+			[
+				'key'          => 'field_qwa_affiliations',
+				'label'        => 'Affiliations',
+				'name'         => 'qwa_affiliations',
+				'type'         => 'repeater',
+				'layout'       => 'block',
+				'button_label' => 'Add Affiliation',
+				'sub_fields'   => [
+					[
+						'key'      => 'field_qwa_af_name',
+						'label'    => 'Name',
+						'name'     => 'name',
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => [ 'width' => '30' ],
+					],
+					[
+						'key'     => 'field_qwa_af_url',
+						'label'   => 'Website URL',
+						'name'    => 'url',
+						'type'    => 'url',
+						'wrapper' => [ 'width' => '30' ],
+					],
+					[
+						'key'           => 'field_qwa_af_logo',
+						'label'         => 'Logo',
+						'name'          => 'logo',
+						'type'          => 'image',
+						'return_format' => 'array',
+						'preview_size'  => 'thumbnail',
+						'wrapper'       => [ 'width' => '40' ],
+					],
+					[
+						'key'   => 'field_qwa_af_description',
+						'label' => 'Description',
+						'name'  => 'description',
+						'type'  => 'textarea',
+						'rows'  => 2,
+					],
+				],
+			],
+		],
+		'location' => [ [ [
+			'param'    => 'page_template',
+			'operator' => '==',
+			'value'    => 'page-quality-warranty-affiliations.php',
+		] ] ],
 	] );
 
 	// -----------------------------------------------------------------------
