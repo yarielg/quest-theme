@@ -776,6 +776,330 @@
   color: var(--qt-color-dark);
 }
 
+/* --------------------------------------------------------------------------
+   Quote buttons (product cards + single product)
+   -------------------------------------------------------------------------- */
+
+/* Guest CTA */
+.quest-quote-cta {
+  background: var(--qt-color-surface);
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  padding: var(--qt-space-6);
+  text-align: center;
+  margin-top: var(--qt-space-4);
+}
+
+.quest-quote-cta__text {
+  font-weight: var(--qt-weight-semibold);
+  margin-bottom: var(--qt-space-4);
+}
+
+.quest-quote-cta__register {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+  margin: var(--qt-space-3) 0 0;
+}
+
+.quest-quote-cta__register a {
+  color: var(--qt-color-primary);
+  font-weight: var(--qt-weight-semibold);
+}
+
+/* Add to Quote — single product (qty + button inline) */
+.quest-quote-actions {
+  margin-top: var(--qt-space-4);
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: var(--qt-radius);
+  overflow: hidden;
+  border: 2px solid var(--qt-color-primary);
+}
+
+.quest-quote-actions__qty {
+  display: flex;
+  align-items: center;
+  gap: var(--qt-space-2);
+  padding: 0 var(--qt-space-3);
+  background: var(--qt-color-surface);
+  border-right: 2px solid var(--qt-color-primary);
+}
+
+.quest-quote-actions__qty label {
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--qt-color-muted);
+  white-space: nowrap;
+}
+
+.quest-quote-actions__input {
+  width: 60px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: var(--qt-text-lg);
+  font-weight: var(--qt-weight-bold);
+  padding: var(--qt-space-3) 0;
+}
+
+.quest-quote-actions__input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.quest-quote-actions .quest-add-to-quote {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+}
+
+.quest-quote-actions__status {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-success);
+  margin: var(--qt-space-2) 0 0;
+}
+
+.quest-quote-actions__status a {
+  color: var(--qt-color-primary);
+  font-weight: var(--qt-weight-semibold);
+}
+
+.quest-add-to-quote--added {
+  background: var(--qt-color-success) !important;
+  border-color: var(--qt-color-success) !important;
+}
+
+/* + Quote button on product loop cards */
+.quest-loop-quote {
+  padding: 0 var(--qt-space-4) var(--qt-space-4);
+}
+
+.quest-loop-quote__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--qt-space-2);
+  width: 100%;
+  padding: var(--qt-space-3) var(--qt-space-4);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  color: #fff;
+  background: var(--qt-color-primary);
+  border: none;
+  border-radius: var(--qt-radius);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background-color var(--qt-transition);
+}
+
+.quest-loop-quote__btn:hover {
+  background: var(--qt-color-primary-dark);
+}
+
+/* --------------------------------------------------------------------------
+   Stock availability modal
+   -------------------------------------------------------------------------- */
+.quest-stock-trigger {
+  margin-top: var(--qt-space-4);
+}
+
+.quest-stock-trigger__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qt-space-2);
+  padding: var(--qt-space-3) var(--qt-space-5);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--qt-color-dark);
+  background: none;
+  border: 2px solid var(--qt-color-border);
+  border-radius: var(--qt-radius);
+  cursor: pointer;
+  transition: all var(--qt-transition);
+}
+
+.quest-stock-trigger__btn:hover {
+  border-color: var(--qt-color-primary);
+  color: var(--qt-color-primary);
+}
+
+.quest-stock-trigger__icon {
+  display: inline-flex;
+  color: var(--qt-color-primary);
+}
+
+/* Modal overlay */
+.quest-stock-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--qt-space-4);
+}
+
+.quest-stock-modal[hidden] {
+  display: none;
+}
+
+.quest-stock-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* Dialog */
+.quest-stock-modal__dialog {
+  position: relative;
+  background: var(--qt-color-card);
+  border-radius: var(--qt-radius-lg);
+  box-shadow: var(--qt-shadow-lg);
+  width: 100%;
+  max-width: 440px;
+  overflow: hidden;
+  animation: quest-modal-in 0.25s ease;
+}
+
+@keyframes quest-modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.quest-stock-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--qt-space-5) var(--qt-space-6);
+  border-bottom: 1px solid var(--qt-color-border);
+}
+
+.quest-stock-modal__title {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-lg);
+  font-weight: var(--qt-weight-extrabold);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.quest-stock-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  color: var(--qt-color-muted);
+  cursor: pointer;
+  border-radius: var(--qt-radius);
+  transition: all var(--qt-transition);
+}
+
+.quest-stock-modal__close:hover {
+  background: var(--qt-color-surface);
+  color: var(--qt-color-dark);
+}
+
+.quest-stock-modal__body {
+  padding: var(--qt-space-6);
+}
+
+/* Product info */
+.quest-stock-modal__product {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--qt-space-5);
+  padding-bottom: var(--qt-space-5);
+  border-bottom: 1px solid var(--qt-color-border);
+}
+
+.quest-stock-modal__product-name {
+  font-size: var(--qt-text-base);
+  font-weight: var(--qt-weight-semibold);
+  color: var(--qt-color-dark);
+}
+
+.quest-stock-modal__product-sku {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  color: var(--qt-color-primary);
+}
+
+/* Form */
+.quest-stock-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qt-space-3);
+}
+
+.quest-stock-modal__form label {
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-semibold);
+  color: var(--qt-color-dark);
+}
+
+.quest-stock-modal__input {
+  padding: var(--qt-space-3) var(--qt-space-4);
+  font-size: var(--qt-text-lg);
+  text-align: center;
+  border: 2px solid var(--qt-color-border);
+  border-radius: var(--qt-radius);
+}
+
+.quest-stock-modal__input:focus {
+  border-color: var(--qt-color-primary);
+}
+
+/* Result */
+.quest-stock-modal__result {
+  text-align: center;
+  padding: var(--qt-space-6) var(--qt-space-4);
+  margin-top: var(--qt-space-5);
+  background: var(--qt-color-surface);
+  border-radius: var(--qt-radius);
+  animation: quest-modal-in 0.3s ease;
+}
+
+.quest-stock-modal__result-icon {
+  margin-bottom: var(--qt-space-3);
+}
+
+.quest-stock-modal__result-icon--available { color: var(--qt-color-success); }
+.quest-stock-modal__result-icon--unavailable { color: var(--qt-color-warning); }
+.quest-stock-modal__result-icon--error { color: var(--qt-color-error); }
+
+.quest-stock-modal__result-text {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xl);
+  font-weight: var(--qt-weight-extrabold);
+  text-transform: uppercase;
+  margin-bottom: var(--qt-space-2);
+}
+
+.quest-stock-modal__result-text--available { color: var(--qt-color-success); }
+.quest-stock-modal__result-text--unavailable { color: var(--qt-color-warning); }
+.quest-stock-modal__result-text--error { color: var(--qt-color-error); }
+
+.quest-stock-modal__result-msg {
+  font-size: var(--qt-text-sm);
+  color: var(--qt-color-muted);
+  line-height: 1.5;
+}
+
 /* Notices */
 .woocommerce .woocommerce-message,
 .woocommerce .woocommerce-info,

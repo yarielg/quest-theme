@@ -4,32 +4,41 @@ defined( 'ABSPATH' ) || exit;
 // ---------------------------------------------------------------------------
 // Catalog mode — conditionally remove add-to-cart, prices, cart
 // ---------------------------------------------------------------------------
-function quest_apply_catalog_mode(): void {
-	if ( ! quest_is_catalog_mode() ) {
-		return;
+// Remove add-to-cart for guests and catalog mode
+add_filter( 'woocommerce_is_purchasable', function ( bool $purchasable ): bool {
+	if ( ! is_user_logged_in() || quest_is_catalog_mode() ) {
+		return false;
 	}
+	return $purchasable;
+} );
 
-	// Remove add-to-cart from product loops
-	remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
-
-	// Remove add-to-cart from single product
-	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 15 );
-	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-
-	// Disable purchasing
-	add_filter( 'woocommerce_is_purchasable', '__return_false' );
-
-	// Redirect cart/checkout to shop
-	if ( ! is_admin() ) {
-		add_action( 'template_redirect', function (): void {
-			if ( is_cart() || is_checkout() ) {
-				wp_safe_redirect( quest_shop_url() );
-				exit;
-			}
-		} );
+add_filter( 'woocommerce_variation_is_purchasable', function ( bool $purchasable ): bool {
+	if ( ! is_user_logged_in() || quest_is_catalog_mode() ) {
+		return false;
 	}
-}
-add_action( 'wp', 'quest_apply_catalog_mode' );
+	return $purchasable;
+} );
+
+add_action( 'wp', function (): void {
+	if ( ! is_user_logged_in() || quest_is_catalog_mode() ) {
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+		remove_action( 'woocommerce_single_variation', 'woocommerce_single_variation_add_to_cart_button', 20 );
+		remove_action( 'woocommerce_simple_add_to_cart', 'woocommerce_simple_add_to_cart', 30 );
+		remove_action( 'woocommerce_grouped_add_to_cart', 'woocommerce_grouped_add_to_cart', 30 );
+		remove_action( 'woocommerce_variable_add_to_cart', 'woocommerce_variable_add_to_cart', 30 );
+		remove_action( 'woocommerce_external_add_to_cart', 'woocommerce_external_add_to_cart', 30 );
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+	}
+} );
+
+add_action( 'template_redirect', function (): void {
+	if ( ! is_user_logged_in() || quest_is_catalog_mode() ) {
+		if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() ) ) {
+			wp_safe_redirect( quest_shop_url() );
+			exit;
+		}
+	}
+} );
 
 // ---------------------------------------------------------------------------
 // Move SKU/meta above the price on single product pages
@@ -38,18 +47,6 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 9 );
 
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-
-// ---------------------------------------------------------------------------
-// Reorder add-to-cart button position on single product (only when not catalog)
-// ---------------------------------------------------------------------------
-function quest_reorder_add_to_cart(): void {
-	if ( quest_is_catalog_mode() ) {
-		return;
-	}
-	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-	add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 15 );
-}
-add_action( 'wp', 'quest_reorder_add_to_cart' );
 
 // ---------------------------------------------------------------------------
 // Remove "Additional information" tab, rename "Description" to "Features"
