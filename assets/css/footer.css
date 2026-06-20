@@ -1,4 +1,103 @@
 /* ==========================================================================
+   Sister site banner (Quest Manufacturing)
+   ========================================================================== */
+.qt-sister {
+  background: var(--qt-color-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: var(--qt-space-10) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.qt-sister::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(135deg, transparent 0%, rgba(204, 0, 0, 0.06) 100%);
+  pointer-events: none;
+}
+
+.qt-sister__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qt-space-6);
+  align-items: center;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .qt-sister__inner {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.qt-sister__label {
+  display: inline-block;
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-xs);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--qt-color-primary);
+  margin-bottom: var(--qt-space-2);
+}
+
+.qt-sister__heading {
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-2xl);
+  font-weight: var(--qt-weight-extrabold);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--qt-space-2);
+}
+
+.qt-sister__text {
+  font-size: var(--qt-text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.qt-sister__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--qt-space-4);
+}
+
+@media (min-width: 768px) {
+  .qt-sister__action {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.qt-sister__logo {
+  height: 40px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.qt-sister__btn {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.qt-sister__btn:hover {
+  background: var(--qt-color-primary);
+  border-color: var(--qt-color-primary);
+  color: #fff;
+}
+
+/* ==========================================================================
    Newsletter bar — global, appears above footer on every page
    ========================================================================== */
 .qt-newsletter {

@@ -387,6 +387,15 @@ function quest_register_acf_fields(): void {
 
 			// Partner logos
 			[
+				'key'           => 'field_sister_site_logo',
+				'label'         => 'Sister Site Logo (Quest Manufacturing)',
+				'name'          => 'sister_site_logo',
+				'type'          => 'image',
+				'return_format' => 'array',
+				'preview_size'  => 'medium',
+				'instructions'  => 'Logo for Quest Manufacturing shown in the sister site banner.',
+			],
+			[
 				'key'           => 'field_partner_logos',
 				'label'         => 'Partner / Certification Logos',
 				'name'          => 'partner_logos',
