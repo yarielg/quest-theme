@@ -141,55 +141,6 @@
   color: var(--qt-color-muted);
 }
 
-/* --------------------------------------------------------------------------
-   Category card
-   -------------------------------------------------------------------------- */
-.qt-category-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--qt-color-card);
-  border: 1px solid var(--qt-color-border);
-  border-radius: var(--qt-radius-md);
-  overflow: hidden;
-  transition: box-shadow var(--qt-transition), transform var(--qt-transition);
-  text-decoration: none;
-  color: inherit;
-}
-
-.qt-category-card:hover {
-  box-shadow: var(--qt-shadow-md);
-  transform: translateY(-2px);
-  color: inherit;
-}
-
-.qt-category-card__img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.qt-category-card__placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: var(--qt-color-surface);
-}
-
-.qt-category-card__info {
-  padding: var(--qt-space-4);
-}
-
-.qt-category-card__name {
-  font-family: var(--qt-font-heading);
-  font-size: var(--qt-text-base);
-  font-weight: var(--qt-weight-bold);
-  margin: 0 0 var(--qt-space-1);
-  color: var(--qt-color-dark);
-}
-
-.qt-category-card__count {
-  font-size: var(--qt-text-xs);
-  color: var(--qt-color-muted);
-}
 
 /* --------------------------------------------------------------------------
    Post card — blog/archive
@@ -233,8 +184,7 @@
    Posts grid / featured grid / category grid
    -------------------------------------------------------------------------- */
 .qt-posts-grid,
-.qt-featured__grid,
-.qt-categories__grid {
+.qt-featured__grid {
   display: grid;
   gap: var(--qt-space-6);
   grid-template-columns: 1fr;
@@ -252,9 +202,6 @@
   .qt-posts-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .qt-categories__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .qt-featured__grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -263,9 +210,6 @@
 @media (min-width: 1024px) {
   .qt-posts-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .qt-categories__grid {
-    grid-template-columns: repeat(4, 1fr);
   }
   .qt-featured__grid {
     grid-template-columns: repeat(4, 1fr);

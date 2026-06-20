@@ -8,11 +8,11 @@
 .qt-archive-banner {
   position: relative;
   background: var(--qt-color-dark);
-  padding: var(--qt-space-10) 0;
+  padding: var(--qt-space-12) 0;
 }
 
 .qt-archive-banner--has-bg {
-  padding: var(--qt-space-16) 0;
+  padding: var(--qt-space-20) 0;
 }
 
 .qt-archive-banner__bg {

@@ -248,3 +248,16 @@
   color: rgba(255, 255, 255, 0.5);
   margin: 0;
 }
+
+.qt-footer__credit {
+  margin-top: var(--qt-space-1) !important;
+}
+
+.qt-footer__credit a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.qt-footer__credit a:hover {
+  color: var(--qt-color-primary);
+}

@@ -5,16 +5,6 @@ $home_url    = home_url( '/' );
 $account_url = quest_account_url();
 $shop_url    = quest_shop_url();
 $cart_url    = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '';
-
-$categories = get_terms( [
-	'taxonomy'   => 'product_cat',
-	'hide_empty' => true,
-	'parent'     => 0,
-	'exclude'    => get_option( 'default_product_cat' ),
-	'orderby'    => 'menu_order',
-	'order'      => 'ASC',
-	'number'     => 10,
-] );
 ?>
 
 <div
@@ -40,14 +30,14 @@ $categories = get_terms( [
 	</div>
 
 	<div class="qt-mobile-menu__search">
-		<form role="search" method="get" action="<?php echo esc_url( $shop_url ); ?>">
+		<form role="search" method="get" action="<?php echo esc_url( $shop_url ); ?>" class="qt-mobile-search-form" data-component="ajax-search">
 			<label for="qt-search-mobile" class="screen-reader-text"><?php esc_html_e( 'Search products', 'quest' ); ?></label>
 			<div class="qt-mobile-search-wrap">
 				<input
 					id="qt-search-mobile"
 					type="search"
 					name="s"
-					placeholder="<?php esc_attr_e( 'Search products...', 'quest' ); ?>"
+					placeholder="<?php esc_attr_e( 'Search products, SKUs...', 'quest' ); ?>"
 					autocomplete="off"
 				>
 				<input type="hidden" name="post_type" value="product">
@@ -55,36 +45,11 @@ $categories = get_terms( [
 					<?php echo quest_icon( 'search', 18 ); ?>
 				</button>
 			</div>
+			<div class="qt-search-results qt-search-results--mobile" aria-live="polite" hidden></div>
 		</form>
 	</div>
 
-	<?php if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) : ?>
-		<div class="qt-mobile-menu__categories">
-			<h3 class="qt-mobile-menu__section-title"><?php esc_html_e( 'Product Categories', 'quest' ); ?></h3>
-			<ul class="qt-mobile-cat-list">
-				<li>
-					<a href="<?php echo esc_url( $shop_url ); ?>" class="qt-mobile-cat-list__link qt-mobile-cat-list__link--all">
-						<?php echo quest_icon( 'grid', 18 ); ?>
-						<?php esc_html_e( 'All Products', 'quest' ); ?>
-					</a>
-				</li>
-				<?php foreach ( $categories as $cat ) :
-					$link = get_term_link( $cat );
-					if ( is_wp_error( $link ) ) continue;
-				?>
-					<li>
-						<a href="<?php echo esc_url( $link ); ?>" class="qt-mobile-cat-list__link">
-							<?php echo esc_html( $cat->name ); ?>
-							<span class="qt-mobile-cat-list__count"><?php echo esc_html( $cat->count ); ?></span>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	<?php endif; ?>
-
 	<nav class="qt-mobile-menu__nav" aria-label="<?php esc_attr_e( 'Mobile navigation', 'quest' ); ?>">
-		<h3 class="qt-mobile-menu__section-title"><?php esc_html_e( 'Menu', 'quest' ); ?></h3>
 		<?php
 		wp_nav_menu( [
 			'theme_location' => 'primary',
@@ -107,7 +72,7 @@ $categories = get_terms( [
 				<?php echo quest_icon( 'account', 18 ); ?>
 				<?php esc_html_e( 'Sign In', 'quest' ); ?>
 			</a>
-			<a href="<?php echo esc_url( $account_url ); ?>" class="qt-btn qt-btn--primary qt-btn--block">
+			<a href="<?php echo esc_url( $account_url . '?action=register' ); ?>" class="qt-btn qt-btn--primary qt-btn--block">
 				<?php esc_html_e( 'Request Access', 'quest' ); ?>
 			</a>
 		<?php endif; ?>

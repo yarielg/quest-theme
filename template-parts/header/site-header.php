@@ -51,12 +51,6 @@ $cart_count  = function_exists( 'WC' ) && WC()->cart ? WC()->cart->get_cart_cont
 		</div>
 
 		<div class="qt-header__actions">
-			<a
-				href="<?php echo esc_url( $shop_url . '?s=' ); ?>"
-				class="qt-header__icon-btn qt-header__search-toggle"
-				aria-label="<?php esc_attr_e( 'Search products', 'quest' ); ?>"
-			><?php echo quest_icon( 'search', 22 ); ?></a>
-
 			<?php
 			if ( is_user_logged_in() ) :
 				$qt_user = wp_get_current_user();

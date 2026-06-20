@@ -118,6 +118,7 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 			<?php else : ?>
 				<p>&copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'All rights reserved.', 'quest' ); ?></p>
 			<?php endif; ?>
+			<p class="qt-footer__credit"><?php esc_html_e( 'Designed by', 'quest' ); ?> <a href="https://webreadynow.com" target="_blank" rel="noopener">WebReadyNow</a></p>
 		</div>
 	</div>
 

@@ -40,7 +40,8 @@ if ( is_wp_error( $categories ) || empty( $categories ) ) {
 		</div>
 		<div class="qt-categories__grid">
 			<?php foreach ( $categories as $category ) :
-				$thumb_url = quest_get_cat_image_url( $category->term_id );
+				$thumb_id  = get_term_meta( $category->term_id, 'thumbnail_id', true );
+				$thumb_url = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'large' ) : quest_get_cat_image_url( $category->term_id );
 				$link      = get_term_link( $category );
 				if ( is_wp_error( $link ) ) continue;
 
@@ -48,7 +49,7 @@ if ( is_wp_error( $categories ) || empty( $categories ) ) {
 					'taxonomy'   => 'product_cat',
 					'hide_empty' => true,
 					'parent'     => $category->term_id,
-					'number'     => 3,
+					'number'     => 4,
 					'orderby'    => 'count',
 					'order'      => 'DESC',
 				] );
@@ -59,25 +60,22 @@ if ( is_wp_error( $categories ) || empty( $categories ) ) {
 					}
 				}
 			?>
-				<a href="<?php echo esc_url( $link ); ?>" class="qt-category-card">
-					<div class="qt-category-card__visual">
+				<a href="<?php echo esc_url( $link ); ?>" class="qt-cat-card">
+					<div class="qt-cat-card__bg">
 						<?php if ( $thumb_url ) : ?>
-							<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $category->name ); ?>" class="qt-category-card__img" loading="lazy">
-						<?php else : ?>
-							<div class="qt-category-card__placeholder">
-								<?php echo quest_icon( 'grid', 32 ); ?>
-							</div>
+							<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $category->name ); ?>" loading="lazy">
 						<?php endif; ?>
-						<span class="qt-category-card__count-badge"><?php echo esc_html( $category->count ); ?> <?php esc_html_e( 'products', 'quest' ); ?></span>
 					</div>
-					<div class="qt-category-card__info">
-						<h3 class="qt-category-card__name"><?php echo esc_html( $category->name ); ?></h3>
+					<div class="qt-cat-card__overlay"></div>
+					<div class="qt-cat-card__content">
+						<span class="qt-cat-card__count"><?php echo esc_html( $category->count ); ?> <?php esc_html_e( 'products', 'quest' ); ?></span>
+						<h3 class="qt-cat-card__name"><?php echo esc_html( $category->name ); ?></h3>
 						<?php if ( ! empty( $child_names ) ) : ?>
-							<p class="qt-category-card__subs"><?php echo esc_html( implode( ', ', $child_names ) ); ?></p>
+							<p class="qt-cat-card__subs"><?php echo esc_html( implode( ' · ', $child_names ) ); ?></p>
 						<?php endif; ?>
-						<span class="qt-category-card__cta">
-							<?php esc_html_e( 'Shop Now', 'quest' ); ?>
-							<?php echo quest_icon( 'arrow-right', 14 ); ?>
+						<span class="qt-cat-card__cta">
+							<?php esc_html_e( 'Explore Category', 'quest' ); ?>
+							<?php echo quest_icon( 'arrow-right', 16 ); ?>
 						</span>
 					</div>
 				</a>
