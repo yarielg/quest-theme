@@ -58,8 +58,8 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 				</div>
 			<?php endif; ?>
 
-			<?php if ( has_nav_menu( 'footer_2' ) ) : ?>
-				<div class="qt-footer__col">
+			<div class="qt-footer__col">
+				<?php if ( has_nav_menu( 'footer_2' ) ) : ?>
 					<h4 class="qt-footer__heading"><?php echo esc_html( $col2_heading ); ?></h4>
 					<?php wp_nav_menu( [
 						'theme_location' => 'footer_2',
@@ -68,34 +68,10 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 						'depth'          => 1,
 						'fallback_cb'    => false,
 					] ); ?>
+				<?php endif; ?>
 
-					<h4 class="qt-footer__heading qt-footer__heading--contact"><?php esc_html_e( 'Contact', 'quest' ); ?></h4>
-					<ul class="qt-footer__contact-list">
-						<?php if ( $address ) : ?>
-							<li>
-								<span class="qt-footer__contact-icon"><?php echo quest_icon( 'home', 16 ); ?></span>
-								<span><?php echo nl2br( esc_html( $address ) ); ?></span>
-							</li>
-						<?php endif; ?>
-						<?php if ( $phone ) : ?>
-							<li>
-								<span class="qt-footer__contact-icon"><?php echo quest_icon( 'phone', 16 ); ?></span>
-								<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
-							</li>
-						<?php endif; ?>
-						<?php if ( $email ) : ?>
-							<li>
-								<span class="qt-footer__contact-icon"><?php echo quest_icon( 'mail', 16 ); ?></span>
-								<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
-							</li>
-						<?php endif; ?>
-					</ul>
-				</div>
-			<?php endif; ?>
-
-			<?php if ( has_nav_menu( 'footer_3' ) ) : ?>
-				<div class="qt-footer__col">
-					<h4 class="qt-footer__heading"><?php echo esc_html( $col3_heading ); ?></h4>
+				<?php if ( has_nav_menu( 'footer_3' ) ) : ?>
+					<h4 class="qt-footer__heading qt-footer__heading--contact"><?php echo esc_html( $col3_heading ); ?></h4>
 					<?php wp_nav_menu( [
 						'theme_location' => 'footer_3',
 						'menu_class'     => 'qt-footer__links',
@@ -103,8 +79,32 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 						'depth'          => 1,
 						'fallback_cb'    => false,
 					] ); ?>
-				</div>
-			<?php endif; ?>
+				<?php endif; ?>
+			</div>
+
+			<div class="qt-footer__col">
+				<h4 class="qt-footer__heading"><?php esc_html_e( 'Contact', 'quest' ); ?></h4>
+				<ul class="qt-footer__contact-list">
+					<?php if ( $address ) : ?>
+						<li>
+							<span class="qt-footer__contact-icon"><?php echo quest_icon( 'home', 16 ); ?></span>
+							<span><?php echo nl2br( esc_html( $address ) ); ?></span>
+						</li>
+					<?php endif; ?>
+					<?php if ( $phone ) : ?>
+						<li>
+							<span class="qt-footer__contact-icon"><?php echo quest_icon( 'phone', 16 ); ?></span>
+							<a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
+						</li>
+					<?php endif; ?>
+					<?php if ( $email ) : ?>
+						<li>
+							<span class="qt-footer__contact-icon"><?php echo quest_icon( 'mail', 16 ); ?></span>
+							<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
+						</li>
+					<?php endif; ?>
+				</ul>
+			</div>
 
 		</div>
 	</div>

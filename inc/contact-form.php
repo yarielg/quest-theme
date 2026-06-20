@@ -81,27 +81,67 @@ function quest_handle_contact_form(): void {
 add_action( 'wp_ajax_quest_contact_form', 'quest_handle_contact_form' );
 add_action( 'wp_ajax_nopriv_quest_contact_form', 'quest_handle_contact_form' );
 
-function quest_enqueue_turnstile(): void {
-	if ( ! is_page_template( 'page-contact.php' ) ) {
-		return;
+// ---------------------------------------------------------------------------
+// Newsletter form handler
+// ---------------------------------------------------------------------------
+function quest_handle_newsletter(): void {
+	check_ajax_referer( 'quest_newsletter', 'quest_newsletter_nonce' );
+
+	if ( ! empty( $_POST['newsletter_hp'] ) ) {
+		wp_send_json_error( [ 'message' => 'Spam detected.' ] );
 	}
 
+	$secret = function_exists( 'get_field' ) ? get_field( 'turnstile_secret_key', 'option' ) : '';
+	if ( $secret ) {
+		$token    = sanitize_text_field( $_POST['cf-turnstile-response'] ?? '' );
+		$response = wp_remote_post( 'https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+			'body' => [
+				'secret'   => $secret,
+				'response' => $token,
+				'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+			],
+		] );
+		if ( ! is_wp_error( $response ) ) {
+			$result = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( empty( $result['success'] ) ) {
+				wp_send_json_error( [ 'message' => 'Security verification failed.' ] );
+			}
+		}
+	}
+
+	$email = sanitize_email( $_POST['newsletter_email'] ?? '' );
+	if ( ! $email || ! is_email( $email ) ) {
+		wp_send_json_error( [ 'message' => 'Please enter a valid email address.' ] );
+	}
+
+	$admin_email = get_option( 'admin_email' );
+	$site_name   = get_bloginfo( 'name' );
+	wp_mail( $admin_email, "[$site_name] Newsletter Signup: $email", "New newsletter subscriber: $email" );
+
+	wp_send_json_success( [ 'message' => 'Thank you for subscribing!' ] );
+}
+add_action( 'wp_ajax_quest_newsletter', 'quest_handle_newsletter' );
+add_action( 'wp_ajax_nopriv_quest_newsletter', 'quest_handle_newsletter' );
+
+function quest_enqueue_turnstile(): void {
 	$site_key = function_exists( 'get_field' ) ? get_field( 'turnstile_site_key', 'option' ) : '';
 	if ( $site_key ) {
-		wp_enqueue_script( 'cf-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true );
+		wp_enqueue_script( 'cf-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, [ 'strategy' => 'defer', 'in_footer' => true ] );
 	}
 
-	wp_enqueue_script(
-		'quest-contact-form',
-		QUEST_URL . '/assets/js/contact-form.js',
-		[],
-		QUEST_VERSION,
-		[ 'strategy' => 'defer', 'in_footer' => true ]
-	);
+	if ( is_page_template( 'page-contact.php' ) ) {
+		wp_enqueue_script(
+			'quest-contact-form',
+			QUEST_URL . '/assets/js/contact-form.js',
+			[],
+			QUEST_VERSION,
+			[ 'strategy' => 'defer', 'in_footer' => true ]
+		);
 
-	wp_localize_script( 'quest-contact-form', 'questContact', [
-		'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-		'nonce'   => wp_create_nonce( 'quest_contact_form' ),
-	] );
+		wp_localize_script( 'quest-contact-form', 'questContact', [
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'quest_contact_form' ),
+		] );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'quest_enqueue_turnstile' );

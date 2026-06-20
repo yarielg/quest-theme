@@ -431,6 +431,40 @@
     }, { passive: true });
   }
 
+  // Newsletter form AJAX
+  var nlForm = document.getElementById('qt-newsletter-form');
+  if (nlForm) {
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = nlForm.querySelector('button[type="submit"]');
+      var result = document.getElementById('qt-newsletter-result');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      var formData = new FormData(nlForm);
+      formData.append('action', 'quest_newsletter');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', (typeof questContact !== 'undefined' ? questContact.ajaxUrl : '/wp-admin/admin-ajax.php'));
+      xhr.onload = function () {
+        var data;
+        try { data = JSON.parse(xhr.responseText); } catch (ex) { return; }
+        if (result) {
+          result.hidden = false;
+          result.textContent = data.data.message || '';
+          result.className = 'qt-newsletter__result qt-newsletter__result--' + (data.success ? 'success' : 'error');
+        }
+        if (data.success) {
+          nlForm.style.display = 'none';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        }
+      };
+      xhr.send(formData);
+    });
+  }
+
   // Scroll reveal — IntersectionObserver (zero performance cost)
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var revealTargets = [
