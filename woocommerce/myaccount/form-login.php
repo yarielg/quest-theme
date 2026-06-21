@@ -65,6 +65,7 @@ $active_tab = ( $show_register || $reg_attempted ) ? 'register' : 'login';
 						</a>
 					</div>
 
+					<?php quest_render_turnstile(); ?>
 					<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
 					<button type="submit" name="login" value="1" class="qt-btn qt-btn--primary qt-btn--block qt-btn--lg">
 						<?php esc_html_e( 'Sign In', 'quest' ); ?>
@@ -156,6 +157,7 @@ $active_tab = ( $show_register || $reg_attempted ) ? 'register' : 'login';
 						</div>
 					</div>
 
+					<?php quest_render_turnstile(); ?>
 					<?php wp_nonce_field( 'quest_register', 'quest_register_nonce' ); ?>
 					<button type="submit" class="qt-btn qt-btn--primary qt-btn--block qt-btn--lg">
 						<?php esc_html_e( 'Submit Application', 'quest' ); ?>

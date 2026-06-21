@@ -30,6 +30,12 @@ function quest_handle_registration(): void {
 		return;
 	}
 
+	$turnstile = quest_verify_turnstile();
+	if ( is_wp_error( $turnstile ) ) {
+		wc_add_notice( $turnstile->get_error_message(), 'error' );
+		return;
+	}
+
 	$fields = [
 		'first_name'   => sanitize_text_field( $_POST['reg_first_name'] ?? '' ),
 		'last_name'    => sanitize_text_field( $_POST['reg_last_name'] ?? '' ),
@@ -209,6 +215,18 @@ function quest_restrict_pending_users(): void {
 	}
 }
 add_action( 'template_redirect', 'quest_restrict_pending_users' );
+
+// ---------------------------------------------------------------------------
+// Turnstile verification on WooCommerce login
+// ---------------------------------------------------------------------------
+function quest_verify_login_turnstile( $validation_error ): \WP_Error {
+	$turnstile = quest_verify_turnstile();
+	if ( is_wp_error( $turnstile ) ) {
+		$validation_error->add( 'turnstile_fail', $turnstile->get_error_message() );
+	}
+	return $validation_error;
+}
+add_filter( 'woocommerce_process_login_errors', 'quest_verify_login_turnstile' );
 
 // ---------------------------------------------------------------------------
 // Custom My Account endpoints

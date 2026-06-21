@@ -107,6 +107,36 @@ function quest_get_cat_image_url( int $term_id, string $size = 'quest-category' 
 	return $thumb_id ? wp_get_attachment_image_url( $thumb_id, $size ) : '';
 }
 
+function quest_verify_turnstile(): true|\WP_Error {
+	$secret = function_exists( 'get_field' ) ? get_field( 'turnstile_secret_key', 'option' ) : '';
+	if ( ! $secret ) {
+		return true;
+	}
+	$token    = sanitize_text_field( $_POST['cf-turnstile-response'] ?? '' );
+	$response = wp_remote_post( 'https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+		'body' => [
+			'secret'   => $secret,
+			'response' => $token,
+			'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+		],
+	] );
+	if ( is_wp_error( $response ) ) {
+		return new \WP_Error( 'turnstile_fail', __( 'Security verification failed. Please try again.', 'quest' ) );
+	}
+	$result = json_decode( wp_remote_retrieve_body( $response ), true );
+	if ( empty( $result['success'] ) ) {
+		return new \WP_Error( 'turnstile_fail', __( 'Security verification failed. Please complete the challenge.', 'quest' ) );
+	}
+	return true;
+}
+
+function quest_render_turnstile(): void {
+	$site_key = function_exists( 'get_field' ) ? get_field( 'turnstile_site_key', 'option' ) : '';
+	if ( $site_key ) {
+		echo '<div class="cf-turnstile" data-sitekey="' . esc_attr( $site_key ) . '" data-theme="light"></div>';
+	}
+}
+
 function quest_why_icon( string $name ): string {
 	$icons = [
 		'expertise' => '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
