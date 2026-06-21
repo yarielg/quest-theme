@@ -663,10 +663,10 @@ function quest_register_acf_fields(): void {
 			],
 			[
 				'key'          => 'field_contact_form_email',
-				'label'        => 'Form Submissions Email',
+				'label'        => 'Form Submissions Email(s)',
 				'name'         => 'contact_form_email',
-				'type'         => 'email',
-				'instructions' => 'Email address that receives contact form submissions. Defaults to the WordPress admin email if empty.',
+				'type'         => 'text',
+				'instructions' => 'Comma-separated email addresses that receive contact form submissions. Defaults to the WordPress admin email if empty.',
 			],
 			[
 				'key'          => 'field_contact_map_embed',
