@@ -353,6 +353,23 @@
     }
   }
 
+  // Locator map/list toggle (mobile)
+  var locToggle = document.getElementById('qt-loc-toggle');
+  if (locToggle) {
+    var locBody = document.querySelector('.qt-locator__body');
+    var locBtns = locToggle.querySelectorAll('.qt-locator__toggle-btn');
+    locBody.setAttribute('data-mobile-view', 'map');
+
+    locBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var view = this.getAttribute('data-view');
+        locBody.setAttribute('data-mobile-view', view);
+        locBtns.forEach(function (b) { b.classList.remove('qt-locator__toggle-btn--active'); });
+        this.classList.add('qt-locator__toggle-btn--active');
+      });
+    });
+  }
+
   // Back to top button
   var backToTop = document.createElement('button');
   backToTop.className = 'qt-back-to-top';

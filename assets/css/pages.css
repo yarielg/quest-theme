@@ -699,9 +699,7 @@
    Distributor Locator
    -------------------------------------------------------------------------- */
 .qt-locator__search {
-  background: var(--qt-color-surface);
   padding: var(--qt-space-6) 0;
-  border-bottom: 1px solid var(--qt-color-border);
 }
 
 .qt-locator__search-row {
@@ -765,7 +763,7 @@
     flex-wrap: wrap;
   }
   .qt-locator__input-wrap {
-    width: 100%;
+    flex: 0 0 100%;
   }
   .qt-locator__radius {
     flex: 1;
@@ -780,6 +778,9 @@
   display: grid;
   grid-template-columns: 1fr;
   height: 600px;
+  border: 1px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-md);
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
@@ -805,17 +806,64 @@
   background: var(--qt-color-background);
 }
 
+/* Mobile toggle tabs */
+.qt-locator__toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: var(--qt-space-3);
+  border: 2px solid var(--qt-color-border);
+  border-radius: var(--qt-radius-full);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .qt-locator__toggle {
+    display: none;
+  }
+}
+
+.qt-locator__toggle-btn {
+  flex: 1;
+  padding: var(--qt-space-2) var(--qt-space-4);
+  font-family: var(--qt-font-heading);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: none;
+  border: none;
+  color: var(--qt-color-muted);
+  cursor: pointer;
+  transition: all var(--qt-transition);
+}
+
+.qt-locator__toggle-btn--active {
+  background: var(--qt-color-primary);
+  color: #fff !important;
+}
+
 @media (max-width: 767px) {
   .qt-locator__body {
     height: auto;
   }
   .qt-locator__map {
-    height: 350px;
+    height: 400px;
   }
   .qt-locator__list {
     border-left: none;
-    border-top: 1px solid var(--qt-color-border);
     max-height: 400px;
+  }
+  .qt-locator__body[data-mobile-view="list"] .qt-locator__map-wrap {
+    display: none;
+  }
+  .qt-locator__body[data-mobile-view="list"] .qt-locator__list {
+    display: block;
+  }
+  .qt-locator__body[data-mobile-view="map"] .qt-locator__map-wrap {
+    display: block;
+  }
+  .qt-locator__body[data-mobile-view="map"] .qt-locator__list {
+    display: none;
   }
 }
 

@@ -56,42 +56,50 @@ sort( $countries );
 		</div>
 	</div>
 
-	<div class="qt-locator" id="qt-locator">
+	<div class="qt-section">
+		<div class="qt-container">
+			<div class="qt-locator" id="qt-locator">
 
-		<!-- Search -->
-		<div class="qt-locator__search">
-			<div class="qt-container">
-				<div class="qt-locator__search-row">
-					<div class="qt-locator__input-wrap">
-						<?php echo quest_icon( 'search', 18 ); ?>
-						<input type="text" id="qt-loc-input" placeholder="<?php esc_attr_e( 'Search by city, state, zip code, or country...', 'quest' ); ?>" autocomplete="off">
+				<!-- Search -->
+				<div class="qt-locator__search">
+					<div class="qt-locator__search-row">
+						<div class="qt-locator__input-wrap">
+							<?php echo quest_icon( 'search', 18 ); ?>
+							<input type="text" id="qt-loc-input" placeholder="<?php esc_attr_e( 'Search by city, state, zip code, or country...', 'quest' ); ?>" autocomplete="off">
+						</div>
+						<select id="qt-loc-radius" class="qt-locator__radius">
+							<option value="25">25 mi</option>
+							<option value="50" selected>50 mi</option>
+							<option value="100">100 mi</option>
+							<option value="250">250 mi</option>
+							<option value="500">500 mi</option>
+							<option value="0"><?php esc_html_e( 'Show All', 'quest' ); ?></option>
+						</select>
+						<button type="button" id="qt-loc-search" class="qt-btn qt-btn--primary">
+							<?php esc_html_e( 'Search', 'quest' ); ?>
+						</button>
 					</div>
-					<select id="qt-loc-radius" class="qt-locator__radius">
-						<option value="25">25 mi</option>
-						<option value="50" selected>50 mi</option>
-						<option value="100">100 mi</option>
-						<option value="250">250 mi</option>
-						<option value="500">500 mi</option>
-						<option value="0"><?php esc_html_e( 'Show All', 'quest' ); ?></option>
-					</select>
-					<button type="button" id="qt-loc-search" class="qt-btn qt-btn--primary">
-						<?php esc_html_e( 'Search', 'quest' ); ?>
-					</button>
+					<div class="qt-locator__status" id="qt-loc-status"></div>
 				</div>
-				<div class="qt-locator__status" id="qt-loc-status"></div>
+
+				<!-- Mobile toggle -->
+				<div class="qt-locator__toggle" id="qt-loc-toggle">
+					<button type="button" class="qt-locator__toggle-btn qt-locator__toggle-btn--active" data-view="map"><?php esc_html_e( 'Map', 'quest' ); ?></button>
+					<button type="button" class="qt-locator__toggle-btn" data-view="list"><?php esc_html_e( 'List', 'quest' ); ?></button>
+				</div>
+
+				<!-- Map + List split -->
+				<div class="qt-locator__body">
+					<div class="qt-locator__map-wrap">
+						<div class="qt-locator__map" id="qt-loc-map"></div>
+					</div>
+					<div class="qt-locator__list" id="qt-loc-list">
+						<div class="qt-locator__list-inner" id="qt-loc-list-inner"></div>
+					</div>
+				</div>
+
 			</div>
 		</div>
-
-		<!-- Map + List split -->
-		<div class="qt-locator__body">
-			<div class="qt-locator__map-wrap">
-				<div class="qt-locator__map" id="qt-loc-map"></div>
-			</div>
-			<div class="qt-locator__list" id="qt-loc-list">
-				<div class="qt-locator__list-inner" id="qt-loc-list-inner"></div>
-			</div>
-		</div>
-
 	</div>
 
 	<?php get_template_part( 'template-parts/content/cta-section' ); ?>
