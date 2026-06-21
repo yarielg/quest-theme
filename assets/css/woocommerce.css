@@ -676,10 +676,12 @@
   border-radius: var(--qt-radius);
   padding: var(--qt-space-5);
   margin-bottom: var(--qt-space-4);
+  text-align: center;
 }
 
 .qt-single-contact-cta p {
   margin: 0 0 var(--qt-space-3);
+  font-size: 1.3rem;
   font-weight: var(--qt-weight-semibold);
   color: var(--qt-color-dark);
 }

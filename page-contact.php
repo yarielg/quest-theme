@@ -52,27 +52,6 @@ if ( empty( $departments ) ) {
 		</div>
 	</div>
 
-	<!-- Department Contacts -->
-	<section class="qt-section qt-contact-depts">
-		<div class="qt-container">
-			<div class="qt-section__header">
-				<h2 class="qt-section__title"><?php esc_html_e( 'Department Contacts', 'quest' ); ?></h2>
-			</div>
-			<div class="qt-contact-depts__grid">
-				<?php foreach ( $departments as $dept ) : ?>
-					<div class="qt-dept-card">
-						<h3 class="qt-dept-card__dept"><?php echo esc_html( $dept['department'] ); ?></h3>
-						<p class="qt-dept-card__name"><?php echo esc_html( $dept['name'] ); ?></p>
-						<a href="mailto:<?php echo esc_attr( $dept['email'] ); ?>" class="qt-dept-card__email"><?php echo esc_html( $dept['email'] ); ?></a>
-						<?php if ( $dept['extension'] ) : ?>
-							<span class="qt-dept-card__ext"><?php printf( esc_html__( 'Ext: %s', 'quest' ), esc_html( $dept['extension'] ) ); ?></span>
-						<?php endif; ?>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-
 	<!-- Contact Form + Company Info -->
 	<section class="qt-section qt-contact-main">
 		<div class="qt-container">
@@ -209,6 +188,27 @@ if ( empty( $departments ) ) {
 					</div>
 				</div>
 
+			</div>
+		</div>
+	</section>
+
+	<!-- Department Contacts -->
+	<section class="qt-section qt-contact-depts">
+		<div class="qt-container">
+			<div class="qt-section__header">
+				<h2 class="qt-section__title"><?php esc_html_e( 'Department Contacts', 'quest' ); ?></h2>
+			</div>
+			<div class="qt-contact-depts__grid">
+				<?php foreach ( $departments as $dept ) : ?>
+					<div class="qt-dept-card">
+						<h3 class="qt-dept-card__dept"><?php echo esc_html( $dept['department'] ); ?></h3>
+						<p class="qt-dept-card__name"><?php echo esc_html( $dept['name'] ); ?></p>
+						<a href="mailto:<?php echo esc_attr( $dept['email'] ); ?>" class="qt-dept-card__email"><?php echo esc_html( $dept['email'] ); ?></a>
+						<?php if ( $dept['extension'] ) : ?>
+							<span class="qt-dept-card__ext"><?php printf( esc_html__( 'Ext: %s', 'quest' ), esc_html( $dept['extension'] ) ); ?></span>
+						<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
