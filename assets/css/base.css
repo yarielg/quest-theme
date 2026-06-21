@@ -295,17 +295,11 @@ p {
   border-radius: var(--qt-radius-sm);
 }
 
-/* Price loading skeleton */
+/* Price loading text */
 .quest-price__loading {
   display: inline-block;
-  width: 80px;
-  height: 16px;
-  background: linear-gradient(90deg, rgba(200,200,200,0.3) 0%, rgba(200,200,200,0.5) 50%, rgba(200,200,200,0.3) 100%);
-  background-size: 200px 100%;
-  animation: qt-skeleton 1.5s ease infinite;
-  border-radius: var(--qt-radius-sm);
-  color: transparent;
-  font-size: 0;
+  color: var(--qt-color-muted);
+  font-size: var(--qt-text-sm);
 }
 
 /* --------------------------------------------------------------------------

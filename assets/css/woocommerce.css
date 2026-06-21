@@ -393,6 +393,28 @@
   color: var(--qt-color-primary);
 }
 
+.quest-price__dots {
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: left;
+}
+
+.quest-price__contact {
+  color: var(--qt-color-primary);
+  text-decoration: none;
+  font-family: var(--qt-font-body);
+  font-size: var(--qt-text-sm);
+  font-weight: var(--qt-weight-medium);
+}
+
+.quest-price__contact:hover {
+  text-decoration: underline;
+}
+
+.quest-price__contact strong {
+  font-weight: var(--qt-weight-bold);
+}
+
 /* View Details CTA */
 .qt-loop-footer {
   margin-top: auto;
