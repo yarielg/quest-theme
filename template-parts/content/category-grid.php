@@ -77,6 +77,10 @@ if ( is_wp_error( $categories ) || empty( $categories ) ) {
 							<?php esc_html_e( 'Explore Category', 'quest' ); ?>
 							<?php echo quest_icon( 'arrow-right', 16 ); ?>
 						</span>
+						<span class="qt-cat-card__mobile-cta">
+							<?php esc_html_e( 'View', 'quest' ); ?>
+							<?php echo quest_icon( 'chevron-right', 14 ); ?>
+						</span>
 					</div>
 				</a>
 			<?php endforeach; ?>
