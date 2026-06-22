@@ -16,8 +16,13 @@ function quest_scripts(): void {
 	);
 
 	wp_enqueue_style( 'quest-base', QUEST_URL . '/assets/css/base.css', [], $ver );
+	wp_enqueue_style( 'quest-header', QUEST_URL . '/assets/css/header.css', [ 'quest-base' ], $ver );
+
+	if ( is_front_page() ) {
+		wp_enqueue_style( 'quest-home', QUEST_URL . '/assets/css/home.css', [ 'quest-base' ], $ver );
+	}
+
 	wp_enqueue_style( 'quest-components', QUEST_URL . '/assets/css/components.css', [ 'quest-base' ], $ver );
-	wp_enqueue_style( 'quest-header', QUEST_URL . '/assets/css/header.css', [ 'quest-components' ], $ver );
 	wp_enqueue_style( 'quest-footer', QUEST_URL . '/assets/css/footer.css', [ 'quest-components' ], $ver );
 
 	if ( quest_is_woo_page() ) {
@@ -56,10 +61,6 @@ function quest_scripts(): void {
 		);
 	}
 
-	if ( is_front_page() ) {
-		wp_enqueue_style( 'quest-home', QUEST_URL . '/assets/css/home.css', [ 'quest-components' ], $ver );
-	}
-
 	wp_enqueue_script(
 		'quest-navigation',
 		QUEST_URL . '/assets/js/navigation.js',
@@ -88,6 +89,50 @@ function quest_disable_cart_fragments(): void {
 	wp_dequeue_script( 'wc-cart-fragments' );
 }
 add_action( 'wp_enqueue_scripts', 'quest_disable_cart_fragments', 99 );
+
+// ---------------------------------------------------------------------------
+// Dequeue jQuery on frontend when not needed
+// ---------------------------------------------------------------------------
+function quest_dequeue_jquery(): void {
+	if ( is_admin() ) return;
+	if ( is_page_template( 'page-distributor-locator.php' ) ) return;
+	if ( function_exists( 'is_account_page' ) && is_account_page() ) return;
+	if ( is_cart() || is_checkout() ) return;
+
+	wp_dequeue_script( 'jquery' );
+	wp_deregister_script( 'jquery' );
+	wp_dequeue_script( 'jquery-migrate' );
+	wp_deregister_script( 'jquery-migrate' );
+}
+add_action( 'wp_enqueue_scripts', 'quest_dequeue_jquery', 99 );
+
+// ---------------------------------------------------------------------------
+// Preconnect hints + defer non-critical WooCommerce CSS
+// ---------------------------------------------------------------------------
+function quest_resource_hints(): void {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+add_action( 'wp_head', 'quest_resource_hints', 1 );
+
+function quest_defer_non_critical_styles( string $tag, string $handle ): string {
+	$defer_handles = [
+		'quest-footer',
+		'quest-components',
+		'quest-pages',
+		'woocommerce-layout',
+		'woocommerce-general',
+		'wc-blocks-style',
+	];
+
+	if ( in_array( $handle, $defer_handles, true ) ) {
+		$tag = str_replace( "rel='stylesheet'", "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"", $tag );
+		$tag .= '<noscript>' . str_replace( "rel='preload' as='style' onload=\"this.onload=null;this.rel='stylesheet'\"", "rel='stylesheet'", $tag ) . '</noscript>';
+	}
+
+	return $tag;
+}
+add_filter( 'style_loader_tag', 'quest_defer_non_critical_styles', 10, 2 );
 
 // ---------------------------------------------------------------------------
 // Dynamic CSS variables from ACF Options

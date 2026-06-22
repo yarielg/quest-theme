@@ -50,7 +50,9 @@ $count = count( $slides );
 	?>
 		<div class="qt-hero__slide<?php echo $i === 0 ? ' qt-hero__slide--active' : ''; ?>" aria-hidden="<?php echo $i === 0 ? 'false' : 'true'; ?>">
 			<?php if ( $bg_url ) : ?>
-				<div class="qt-hero__bg" style="background-image:url('<?php echo esc_url( $bg_url ); ?>');background-position:<?php echo esc_attr( $bg_pos ); ?>"></div>
+				<div class="qt-hero__bg">
+					<img src="<?php echo esc_url( $bg_url ); ?>" alt="" style="object-position:<?php echo esc_attr( $bg_pos ); ?>"<?php echo $i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'; ?>>
+				</div>
 			<?php endif; ?>
 			<div class="qt-hero__overlay" style="background:<?php echo esc_attr( $bg_color ); ?>;opacity:<?php echo esc_attr( $opacity ); ?>"></div>
 
