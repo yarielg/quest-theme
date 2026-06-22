@@ -95,9 +95,10 @@ add_action( 'wp_enqueue_scripts', 'quest_disable_cart_fragments', 99 );
 // ---------------------------------------------------------------------------
 function quest_dequeue_jquery(): void {
 	if ( is_admin() ) return;
-	if ( is_page_template( 'page-distributor-locator.php' ) ) return;
+	if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) return;
 	if ( function_exists( 'is_account_page' ) && is_account_page() ) return;
-	if ( is_cart() || is_checkout() ) return;
+	if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() ) ) return;
+	if ( is_page_template( 'page-distributor-locator.php' ) ) return;
 
 	wp_dequeue_script( 'jquery' );
 	wp_deregister_script( 'jquery' );
