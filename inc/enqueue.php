@@ -117,9 +117,11 @@ add_action( 'wp_head', 'quest_resource_hints', 1 );
 
 function quest_defer_non_critical_styles( string $tag, string $handle ): string {
 	$defer_handles = [
+		'quest-fonts',
 		'quest-footer',
 		'quest-components',
 		'quest-pages',
+		'quest-woocommerce',
 		'woocommerce-layout',
 		'woocommerce-general',
 		'wc-blocks-style',

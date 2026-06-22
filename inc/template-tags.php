@@ -15,7 +15,7 @@ function quest_is_woo_page(): bool {
 	if ( ! function_exists( 'is_woocommerce' ) ) {
 		return false;
 	}
-	return is_woocommerce() || is_cart() || is_checkout() || is_account_page() || is_front_page();
+	return is_woocommerce() || is_cart() || is_checkout() || is_account_page();
 }
 
 /**
