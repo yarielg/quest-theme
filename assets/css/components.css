@@ -192,8 +192,7 @@
 
 @media (min-width: 480px) {
   .qt-posts-grid,
-  .qt-featured__grid,
-  .qt-categories__grid {
+  .qt-featured__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
