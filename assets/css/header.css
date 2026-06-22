@@ -714,14 +714,17 @@
   background: var(--qt-color-background);
   z-index: var(--qt-z-drawer);
   transform: translateX(-100%);
-  transition: transform var(--qt-transition-slow);
+  transition: transform var(--qt-transition-slow), visibility 0s linear 0.3s;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  visibility: hidden;
 }
 
 .qt-mobile-menu[aria-hidden="false"] {
   transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--qt-transition-slow), visibility 0s;
 }
 
 .qt-mobile-menu__head {

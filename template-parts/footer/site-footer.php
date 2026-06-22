@@ -47,7 +47,7 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 
 			<?php if ( has_nav_menu( 'footer_1' ) ) : ?>
 				<div class="qt-footer__col">
-					<h4 class="qt-footer__heading"><?php echo esc_html( $col1_heading ); ?></h4>
+					<span class="qt-footer__heading" role="heading" aria-level="2"><?php echo esc_html( $col1_heading ); ?></span>
 					<?php wp_nav_menu( [
 						'theme_location' => 'footer_1',
 						'menu_class'     => 'qt-footer__links',
@@ -60,7 +60,7 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 
 			<div class="qt-footer__col">
 				<?php if ( has_nav_menu( 'footer_2' ) ) : ?>
-					<h4 class="qt-footer__heading"><?php echo esc_html( $col2_heading ); ?></h4>
+					<span class="qt-footer__heading" role="heading" aria-level="2"><?php echo esc_html( $col2_heading ); ?></span>
 					<?php wp_nav_menu( [
 						'theme_location' => 'footer_2',
 						'menu_class'     => 'qt-footer__links',
@@ -71,7 +71,7 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 				<?php endif; ?>
 
 				<?php if ( has_nav_menu( 'footer_3' ) ) : ?>
-					<h4 class="qt-footer__heading qt-footer__heading--contact"><?php echo esc_html( $col3_heading ); ?></h4>
+					<h4 class="qt-footer__heading qt-footer__heading--contact"><?php echo esc_html( $col3_heading ); ?></span>
 					<?php wp_nav_menu( [
 						'theme_location' => 'footer_3',
 						'menu_class'     => 'qt-footer__links',
@@ -83,7 +83,7 @@ $social = function_exists( 'get_field' ) ? get_field( 'social_links', 'option' )
 			</div>
 
 			<div class="qt-footer__col">
-				<h4 class="qt-footer__heading"><?php esc_html_e( 'Contact', 'quest' ); ?></h4>
+				<span class="qt-footer__heading" role="heading" aria-level="2"><?php esc_html_e( 'Contact', 'quest' ); ?></span>
 				<ul class="qt-footer__contact-list">
 					<?php if ( $address ) : ?>
 						<li>

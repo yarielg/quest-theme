@@ -70,7 +70,7 @@ $count = count( $slides );
 
 					<?php if ( ! empty( $slide['cta_text'] ) && ! empty( $slide['cta_url'] ) ) : ?>
 						<div class="qt-hero__cta">
-							<a href="<?php echo esc_url( $slide['cta_url'] ); ?>" class="qt-btn qt-btn--lg <?php echo esc_attr( $btn_class ); ?>">
+							<a href="<?php echo esc_url( $slide['cta_url'] ); ?>" class="qt-btn qt-btn--lg <?php echo esc_attr( $btn_class ); ?>"<?php echo $i !== 0 ? ' tabindex="-1"' : ''; ?>>
 								<?php echo esc_html( $slide['cta_text'] ); ?>
 								<?php echo quest_icon( 'arrow-right', 18 ); ?>
 							</a>

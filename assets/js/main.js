@@ -36,6 +36,8 @@
       function goToSlide(index) {
         slides[current].classList.remove('qt-hero__slide--active');
         slides[current].setAttribute('aria-hidden', 'true');
+        var oldLinks = slides[current].querySelectorAll('a, button');
+        oldLinks.forEach(function (l) { l.setAttribute('tabindex', '-1'); });
         if (dots[current]) {
           dots[current].classList.remove('qt-hero__progress-dot--active');
           var bar = dots[current].querySelector('.qt-hero__progress-bar');
@@ -46,6 +48,8 @@
 
         slides[current].classList.add('qt-hero__slide--active');
         slides[current].setAttribute('aria-hidden', 'false');
+        var newLinks = slides[current].querySelectorAll('a, button');
+        newLinks.forEach(function (l) { l.removeAttribute('tabindex'); });
         if (dots[current]) {
           dots[current].classList.add('qt-hero__progress-dot--active');
           var activeBar = dots[current].querySelector('.qt-hero__progress-bar');
