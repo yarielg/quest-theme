@@ -113,6 +113,13 @@ add_action( 'wp_enqueue_scripts', 'quest_dequeue_jquery', 99 );
 function quest_resource_hints(): void {
 	echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>' . "\n";
 	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+
+	if ( is_front_page() && function_exists( 'get_field' ) ) {
+		$slides = get_field( 'hero_slides', 'option' );
+		if ( ! empty( $slides[0]['bg_image']['url'] ) ) {
+			echo '<link rel="preload" as="image" href="' . esc_url( $slides[0]['bg_image']['url'] ) . '" fetchpriority="high">' . "\n";
+		}
+	}
 }
 add_action( 'wp_head', 'quest_resource_hints', 1 );
 
