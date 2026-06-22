@@ -132,6 +132,7 @@ function quest_defer_non_critical_styles( string $tag, string $handle ): string 
 		'quest-woocommerce',
 		'woocommerce-layout',
 		'woocommerce-general',
+		'woocommerce-smallscreen',
 		'wc-blocks-style',
 	];
 
